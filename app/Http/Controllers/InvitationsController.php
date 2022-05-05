@@ -6,6 +6,7 @@ use App\Models\Invitation;
 use App\Http\Requests\StoreInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
 
+use Illuminate\Support\Str;
 class InvitationsController extends Controller
 {
     /**
@@ -15,7 +16,9 @@ class InvitationsController extends Controller
      */
     public function index()
     {
-        
+        return view('invitations.index', [
+            'invitations' => Invitation::all()
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class InvitationsController extends Controller
      */
     public function create()
     {
-        //
+        return view('invitations.create');
     }
 
     /**
@@ -36,7 +39,14 @@ class InvitationsController extends Controller
      */
     public function store(StoreInvitationRequest $request)
     {
-        //
+        $invitation = Invitation::create([
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'email' => request('email'),
+            'key' => Str::orderedUuid(),
+        ]);
+
+        return redirect()->route('invitations.index');
     }
 
     /**
@@ -58,7 +68,9 @@ class InvitationsController extends Controller
      */
     public function edit(Invitation $invitation)
     {
-        //
+        return view('invitations.edit', [
+            'invitation' => $invitation
+        ]);
     }
 
     /**

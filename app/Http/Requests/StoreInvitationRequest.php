@@ -13,7 +13,7 @@ class StoreInvitationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreInvitationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'unique:invitations']
         ];
     }
 }
