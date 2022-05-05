@@ -29,7 +29,7 @@ class UpdateInvitationRequest extends FormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', Rule::unique('invitations', 'email')->ignore($this->invitation)],
-            'flashed' => ['required', 'boolean']
+            'is_scanned' => ['boolean']
         ];
     }
 }

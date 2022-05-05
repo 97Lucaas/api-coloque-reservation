@@ -10,8 +10,9 @@
             @foreach($invitations as $invitation)
                 <article class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <header class="p-6">
-                        {{ $invitation->full_name()}}
+                        <h4 class="text-xl">{{ $invitation->full_name()}} @if($invitation->is_scanned)(scanné)@endif</h4>
                         <a href="{{ route('invitations.edit', $invitation->id) }}">Éditer</a>
+                        <a href="{{ route('invitations.scan', $invitation->id) }}">Scanner</a>
                     </header>
                 </article>
             @endforeach

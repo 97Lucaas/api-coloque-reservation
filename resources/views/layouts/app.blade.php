@@ -28,6 +28,8 @@
             </header>
 
             <!-- Page Content -->
+
+            <x-flashed-data/>
             <main>
                 {{ $slot }}
             </main>

@@ -13,5 +13,9 @@ if(old($name)) {
 <div class="mb-4">
     <x-label :for="$name" :value="$label" />
 
-    <x-input :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" :value="$value" />
+    @if($type == "checkbox")
+        <x-input :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" value="1" :checked="$value" />
+    @else
+        <x-input :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" :value="$value" />
+    @endif
 </div>

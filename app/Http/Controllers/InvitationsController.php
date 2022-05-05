@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invitation;
 use App\Http\Requests\StoreInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class InvitationsController extends Controller
 {
@@ -60,6 +60,28 @@ class InvitationsController extends Controller
         //
     }
 
+
+    /**
+     * Show the specified resource and set is_scanned to true
+     *
+     * @param  \App\Models\Invitation  $invitation
+     * @return \Illuminate\Http\Response
+     */
+    public function scan(Request $request, Invitation $invitation)
+    {
+        if($invitation->is_scanned) {
+            $request->session()->now('error', 'Invitation déjà scannée');
+        } else {
+            $request->session()->now('status', 'Scanné avec succès');
+        }
+        $invitation->is_scanned = true;
+        $invitation->save();
+
+        return view('invitations.show', [
+            'invitation' => $invitation
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -81,8 +103,11 @@ class InvitationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateInvitationRequest $request, Invitation $invitation)
-    {
-        //
+    {        
+        $invitation->is_scanned = $request->input('is_scanned') ? true : false;
+        $invitation->save();
+
+        return redirect()->route('invitations.index');
     }
 
     /**
