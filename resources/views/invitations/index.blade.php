@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row gap-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row gap-2">
             @foreach($invitations as $invitation)
                 <article class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <header class="p-6">
