@@ -7,6 +7,9 @@ use App\Http\Requests\StoreInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
+use App\Mail\InvitationCreated;
+use Illuminate\Support\Facades\Mail;
 class InvitationsController extends Controller
 {
     /**
@@ -43,12 +46,12 @@ class InvitationsController extends Controller
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
-            'key' => Str::orderedUuid(),
+            'key' => Str::orderedUuid()
         ]);
 
         $cle = $invitation->key;
 
-        
+        Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
         return redirect()->route('invitations.index');
     }

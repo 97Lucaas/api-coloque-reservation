@@ -11,14 +11,16 @@ class InvitationCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $invitation;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($invitation)
     {
-        //
+        $this->invitation = $invitation;
     }
 
     /**
@@ -28,6 +30,12 @@ class InvitationCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('vendor.mail.html.message');
+        $full_name = $this->invitation->full_name();
+        return $this->markdown('vendor.notifications.email')
+            ->with('introLines', [
+                "Bonjour $full_name, voici votre billet d'entrée",
+                "Passez une bonne journée"
+            ])
+        ;
     }
 }
