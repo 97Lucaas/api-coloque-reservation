@@ -18,6 +18,8 @@
                     <code>n°{{ $invitation->key }}</code>
                 </main>
                 <a href="{{ route('scanner') }}">Scanner à nouveau</a>
+
+                
             </article>
         </div>
     </div>
