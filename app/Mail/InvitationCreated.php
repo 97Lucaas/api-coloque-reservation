@@ -34,8 +34,8 @@ class InvitationCreated extends Mailable
         return $this->markdown('vendor.notifications.invitation')
             ->with('key',$this->invitation->key)
             ->with('introLines', [
-                "Bonjour $full_name, voici votre billet",
-                "Passez une bonne journée"
+                "Bonjour $full_name, voici votre billet,",
+                "nous vous le demanderons le jour du colloque."
             ])
         ;
     }

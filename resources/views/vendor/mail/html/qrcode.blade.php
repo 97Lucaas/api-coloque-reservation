@@ -1,1 +1,0 @@
-<img src="{{config('app.url')}}/storage/qrcodes/{{ $key }}.png" alt="App Logo">
