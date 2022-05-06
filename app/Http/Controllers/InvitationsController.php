@@ -64,7 +64,7 @@ class InvitationsController extends Controller
         // saving the result to a file:
 
         //$qrCode->writeFile(__DIR__ . '/code.png'); // writer defaults to PNG when none is specified
-        Storage::disk('local')->put("qrcodes/$cle.png", $qrCode->writeString());
+        Storage::disk('local')->put("public/qrcodes/$cle.png", $qrCode->writeString());
 
         // display directly to the browser 
         //header('Content-Type: '.$qrCode->getContentType());
