@@ -10,12 +10,14 @@ if(old($name)) {
 
 @endphp
 
-<div class="mb-4">
-    <x-label :for="$name" :value="$label" />
-
-    @if($type == "checkbox")
-        <x-input :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" value="1" :checked="$value" />
-    @else
+@if($type == "checkbox")
+    <div class="flex flex-row mb-4 items-center gap-3">
+        <x-input :id="$name" class=" block h-6 w-6" :type="$type" :name="$name" value="1" :checked="$value" />
+        <x-label :for="$name" :value="$label" class="cursor-pointer" />
+    </div>
+@else
+    <div class="mb-4">
+        <x-label :for="$name" :value="$label" />
         <x-input :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" :value="$value" />
-    @endif
-</div>
+    </div>
+@endif
