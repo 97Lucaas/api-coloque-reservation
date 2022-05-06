@@ -16,8 +16,8 @@
                 </header>
                 <main class="p-6">
                     <code>n°{{ $invitation->key }}</code>
+                    <x-button :href="route('scanner')">Scanner à nouveau</x-button>
                 </main>
-                <x-button :href="route('scanner')">Scanner à nouveau</x-button>
             </article>
         </div>
     </div>
