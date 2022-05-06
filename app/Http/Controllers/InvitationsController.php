@@ -150,6 +150,7 @@ class InvitationsController extends Controller
      */
     public function destroy(Invitation $invitation)
     {
-        //
+        $invitation->delete();
+        return redirect()->route('invitations.index');
     }
 }
