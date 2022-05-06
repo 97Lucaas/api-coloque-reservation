@@ -31,9 +31,10 @@ class InvitationCreated extends Mailable
     public function build()
     {
         $full_name = $this->invitation->full_name();
-        return $this->markdown('vendor.notifications.email')
+        return $this->markdown('vendor.notifications.invitation')
+            ->with('key',$this->invitation->key)
             ->with('introLines', [
-                "Bonjour $full_name, voici votre billet d'entrée",
+                "Bonjour $full_name, voici votre billet",
                 "Passez une bonne journée"
             ])
         ;
