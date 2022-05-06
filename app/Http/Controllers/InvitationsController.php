@@ -95,8 +95,10 @@ class InvitationsController extends Controller
      * @param  \App\Models\Invitation  $invitation
      * @return \Illuminate\Http\Response
      */
-    public function scan(Request $request, Invitation $invitation)
+    public function scan(Request $request, $invitation_key)
     {
+        $invitation = Invitation::where('key', $invitation_key)->firstOrFail();
+
         if($invitation->is_scanned) {
             // now method is defined, not an error
             $request->session()->now('error', 'Invitation déjà scannée');

@@ -16,7 +16,7 @@
                             Éditer
                         </x-button>
 
-                        <x-button :href="route('invitations.scan', $invitation->id)">
+                        <x-button :href="route('invitations.scan', $invitation->key)">
                             Scanner
                         </x-button>
                     </header>

@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
         return view('scanner');
     })->name('scanner');
 
-    Route::get('/invitations/{invitation}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
+    Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
     Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
 });
