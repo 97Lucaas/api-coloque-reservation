@@ -15,11 +15,11 @@ use App\Http\Controllers\InvitationsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
