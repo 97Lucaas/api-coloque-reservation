@@ -19,3 +19,4 @@
 
 Cordialement, <br/>
 {{ config('app.name') }}
+@endcomponent
