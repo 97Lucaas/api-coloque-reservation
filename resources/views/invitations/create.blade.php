@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Créer une invitation
@@ -15,8 +15,8 @@
             <x-form-control label="Email" name="email" type="email" />
 
             <x-button>
-                Créer
+                Rejoindre
             </x-button>
         </form>
     </x-form-card>
-</x-app-layout>
+</x-guest-layout>

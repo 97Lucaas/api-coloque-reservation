@@ -70,8 +70,10 @@ class InvitationsController extends Controller
     public function scan(Request $request, Invitation $invitation)
     {
         if($invitation->is_scanned) {
+            // now method is defined, not an error
             $request->session()->now('error', 'Invitation déjà scannée');
         } else {
+            // now method is defined, not an error
             $request->session()->now('status', 'Scanné avec succès');
         }
         $invitation->is_scanned = true;

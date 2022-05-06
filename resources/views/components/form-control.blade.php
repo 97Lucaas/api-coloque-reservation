@@ -1,4 +1,4 @@
-@props(['bind', 'value'=>'', 'type'=>'text', 'label', 'name', 'disabled' => false])
+@props(['bind'=>false, 'value'=>'', 'type'=>'text', 'label', 'name', 'disabled' => false])
 
 @php
 if($bind && isset($bind[$name])) {

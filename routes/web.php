@@ -16,6 +16,7 @@ use App\Http\Controllers\InvitationsController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 
 
 Route::middleware(['auth'])->group(function () {
@@ -24,8 +25,10 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::get('/invitations/{invitation}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
-    Route::resource('invitations', InvitationsController::class);
+    Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
 });
+
+
 
 require __DIR__.'/auth.php';
