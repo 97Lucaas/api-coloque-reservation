@@ -16,9 +16,15 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @auth
+                @include('layouts.navigation')
+            @endauth
+            <main class="pt-16">
+                <x-flashed-data/>
+                {{ $slot }}
+            </main>
         </div>
     </body>
 </html>

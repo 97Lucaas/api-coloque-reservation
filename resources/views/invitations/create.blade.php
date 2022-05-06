@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <x-form-card>
+    <x-form-card title="Invitation colloque">
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <form method="POST" action="{{ route('invitations.store') }}">
             @csrf
@@ -15,7 +15,7 @@
             <x-form-control label="Email" name="email" type="email" />
 
             <x-button>
-                Rejoindre
+                Générer mon invitation
             </x-button>
         </form>
     </x-form-card>
