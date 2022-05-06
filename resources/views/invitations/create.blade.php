@@ -4,6 +4,7 @@
             Créer une invitation
         </h2>
     </x-slot>
+    
 
     <x-form-card title="Invitation colloque">
         <x-auth-validation-errors class="mb-4" :errors="$errors" />

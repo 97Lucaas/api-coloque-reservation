@@ -7,6 +7,8 @@ use App\Http\Requests\StoreInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Da\QrCode\QrCode;
+use Illuminate\Support\Facades\Storage;
 class InvitationsController extends Controller
 {
     /**
@@ -48,7 +50,25 @@ class InvitationsController extends Controller
 
         $cle = $invitation->key;
 
-        
+
+
+        $qrCode = (new QrCode($cle))
+            ->setSize(250)
+            ->setMargin(20)
+            ->useForegroundColor(0,0,0);
+
+        // now we can display the qrcode in many ways
+        // saving the result to a file:
+
+        //$qrCode->writeFile(__DIR__ . '/code.png'); // writer defaults to PNG when none is specified
+        Storage::disk('local')->put("qrcodes/$cle.png", $qrCode->writeString());
+
+        // display directly to the browser 
+        //header('Content-Type: '.$qrCode->getContentType());
+        //echo $qrCode->writeString();
+
+
+
 
         return redirect()->route('invitations.index');
     }
