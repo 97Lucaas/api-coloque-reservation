@@ -291,8 +291,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var videoElem = document.getElementById('scanner-camera');
 var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"](videoElem, function (result) {
-  console.log('decoded qr code:', result);
-  window.location.href = "/invitations/".concat(result, "/scan");
+  qrScanner.stop();
+  console.log('decoded qr code:', result); //window.location.href = `/invitations/${result}/scan`
 });
 qrScanner.start();
 })();
