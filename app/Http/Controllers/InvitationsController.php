@@ -46,6 +46,10 @@ class InvitationsController extends Controller
             'key' => Str::orderedUuid(),
         ]);
 
+        $cle = $invitation->key;
+
+        
+
         return redirect()->route('invitations.index');
     }
 
