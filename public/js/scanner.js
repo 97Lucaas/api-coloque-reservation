@@ -288,7 +288,10 @@ var __webpack_exports__ = {};
   \*********************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var qr_scanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! qr-scanner */ "./node_modules/qr-scanner/qr-scanner.min.js");
- // window.location.href = `/invitations/${key}/scan`
+
+var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"](videoElem, function (result) {
+  console.log('decoded qr code:', result); // window.location.href = `/invitations/${key}/scan`
+});
 })();
 
 /******/ })()

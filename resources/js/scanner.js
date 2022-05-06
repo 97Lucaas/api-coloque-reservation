@@ -1,5 +1,6 @@
 import QrScanner from 'qr-scanner'; 
 
-
-
-// window.location.href = `/invitations/${key}/scan`
+const qrScanner = new QrScanner(videoElem, result => {
+    console.log('decoded qr code:', result)
+    // window.location.href = `/invitations/${key}/scan`
+});
