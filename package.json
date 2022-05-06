@@ -21,6 +21,8 @@
         "tailwindcss": "^3.0.18"
     },
     "dependencies": {
+        "crypto": "^1.0.1",
+        "fs": "^0.0.1-security",
         "qr-scanner": "^1.4.1"
     }
 }
