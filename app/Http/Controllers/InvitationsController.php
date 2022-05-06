@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Da\QrCode\QrCode;
 use Illuminate\Support\Facades\Storage;
+
+use App\Mail\InvitationCreated;
+use Illuminate\Support\Facades\Mail;
 class InvitationsController extends Controller
 {
     /**
@@ -45,7 +48,7 @@ class InvitationsController extends Controller
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
-            'key' => Str::orderedUuid(),
+            'key' => Str::orderedUuid()
         ]);
 
         $cle = $invitation->key;
@@ -69,6 +72,7 @@ class InvitationsController extends Controller
 
 
 
+        Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
         return redirect()->route('invitations.index');
     }
