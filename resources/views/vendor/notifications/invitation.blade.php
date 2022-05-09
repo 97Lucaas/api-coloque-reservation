@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# Hello!
+# Bonjour !
 
 @isset($introLines)
 @foreach ($introLines as $line)

@@ -27,6 +27,10 @@ blockquote {
     text-align: left;
 }
 
+img{
+    margin: 0 auto;
+}
+
 a {
     color: #3869d4;
 }
