@@ -32,9 +32,10 @@ class InvitationCreated extends Mailable
     {
         $full_name = $this->invitation->full_name();
         return $this->markdown('vendor.notifications.invitation')
+            ->subject("Votre ticket MMI Bordeaux")
             ->with('key',$this->invitation->key)
             ->with('introLines', [
-                "Bonjour $full_name, voici votre billet,",
+                "Bonjour **$full_name**, voici votre billet,",
                 "nous vous le demanderons le jour du colloque."
             ])
         ;
