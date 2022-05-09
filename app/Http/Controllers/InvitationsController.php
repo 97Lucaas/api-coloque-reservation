@@ -97,7 +97,10 @@ class InvitationsController extends Controller
      */
     public function scan(Request $request, $invitation_key)
     {
-        $invitation = Invitation::where('key', $invitation_key)->firstOrFail();
+        $invitation = Invitation::where('key', $invitation_key)->firstOr(function () use($request) {
+            $request->session()->now('error', 'Invitation introuvable');
+            return redirect()->route('invitations.scan');
+        });
 
         if($invitation->is_scanned) {
             // now method is defined, not an error
