@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Validation\Rule;
+
+
 class StoreInvitationRequest extends FormRequest
 {
     /**
@@ -26,7 +29,7 @@ class StoreInvitationRequest extends FormRequest
         return [
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'unique:invitations']
+            'email' => ['required', 'string', 'email', Rule::unique('invitations', 'email')],
         ];
     }
 }
