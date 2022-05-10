@@ -31,6 +31,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
     Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
+    Route::get('/command/gitpull', function () {
+        //SSH::run(array(
+        //    'cd /coloque.mmibdx.fr',
+        //    'git pull',
+        //));
+    })->name('command.gitpull');
+    Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 });
 
 

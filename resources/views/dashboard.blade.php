@@ -15,6 +15,10 @@
                     <x-button :href="route('invitations.index')">
                         Tout voir
                     </x-button>
+
+                    <x-button :href="route('command.gitpull')">
+                        Git Pull
+                    </x-button>
                     
                     <x-button :href="route('invitations.create')">
                         Générer une invitation
