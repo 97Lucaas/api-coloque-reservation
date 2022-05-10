@@ -33,6 +33,4 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 });
 
-
-
 require __DIR__.'/auth.php';

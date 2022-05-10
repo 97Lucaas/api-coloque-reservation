@@ -1,15 +1,9 @@
-@if (session('status') || session('warn') || session('error'))
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        @if (session('status'))
-            <div class="bg-emerald-200 px-6 py-4 rounded-lg text-lg">
-                {{ session('status') }}
-            </div>
-        @endif
+<div id="notifications-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3 py-6">
+    @if (session('status'))
+        <x-flashed.status/>
+    @endif
 
-        @if (session('error'))
-            <div class="bg-rose-200 px-6 py-4 rounded-lg text-lg">
-                {{ session('error') }}
-            </div>
-        @endif
-    </div>
-@endif
+    @if (session('error'))
+        <x-flashed.error/>
+    @endif
+</div>

@@ -5078,6 +5078,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./notify */ "./resources/js/notify.js");
+
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
@@ -5112,6 +5114,52 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/notify.js":
+/*!********************************!*\
+  !*** ./resources/js/notify.js ***!
+  \********************************/
+/***/ (() => {
+
+(function () {
+  var notificationTypes = ['status', 'error'];
+  window.notify = {
+    container: document.getElementById('notifications-container'),
+    notifications: [],
+    limit: 3,
+    clear: function clear() {
+      while (notificationsContainer.lastChild) {
+        notificationsContainer.lastChild.remove();
+      }
+    }
+  };
+
+  var _loop = function _loop() {
+    var type = _notificationTypes[_i];
+
+    window.notify[type] = function (text, noDuplicate) {
+      if (this.notifications.length == this.limit) {
+        this.container.children[this.container.children.length - 1].remove();
+        this.notifications.pop();
+      }
+
+      this.notifications.unshift({
+        type: type,
+        text: text
+      });
+      var notifEl = document.importNode(document.getElementById("notification-".concat(type, "-template")).content, true);
+      notifEl.querySelector('div').textContent = text;
+      this.container.prepend(notifEl);
+      console.log(this.notifications);
+    };
+  };
+
+  for (var _i = 0, _notificationTypes = notificationTypes; _i < _notificationTypes.length; _i++) {
+    _loop();
+  }
+})();
 
 /***/ }),
 
