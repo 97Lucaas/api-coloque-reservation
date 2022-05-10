@@ -298,14 +298,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var videoElem = document.getElementById('scanner-camera');
 var cameraChoice = document.getElementById('scanner-camera-choice');
 var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"](videoElem, function (result) {
-  qrScanner.stop();
-  console.log('decoded qr code:', result);
-  window.location.href = "/invitations/".concat(result, "/scan");
+  if (/^[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}$/.test(result)) {
+    qrScanner.stop();
+    console.log('decoded qr code:', result);
+    window.location.href = "/invitations/".concat(result, "/scan");
+  } else {
+    notify.error('QR code invalide', true);
+  }
 });
 qrScanner.start();
 qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"].listCameras(true).then(function (cameras) {
-  console.log(cameras);
-
   var _iterator = _createForOfIteratorHelper(cameras),
       _step;
 

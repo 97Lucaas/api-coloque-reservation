@@ -40,6 +40,4 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 });
 
-
-
 require __DIR__.'/auth.php';

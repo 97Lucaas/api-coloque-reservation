@@ -36,5 +36,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+
+        <x-flashed-data-template/>
     </body>
 </html>
