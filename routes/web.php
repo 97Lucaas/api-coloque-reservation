@@ -33,7 +33,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
     Route::get('/command/gitpull', function () {
-        exec("git pull", $output);
+        exec("cd .. && git pull", $output);
         dd($output);
 
     })->name('command.gitpull');
@@ -41,7 +41,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/command/migrate', function () {
         exec("cd .. && php artisan migrate", $output);
         dd($output);
-
     })->name('command.migrate');
 });
 
