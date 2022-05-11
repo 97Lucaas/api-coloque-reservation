@@ -32,11 +32,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
     Route::get('/command/gitpull', function () {
-        //SSH::run(array(
-        //    'cd /coloque.mmibdx.fr',
-        //    'git pull',
-        //));
-        // execute command
         exec("git pull", $output);
         dd($output);
 
