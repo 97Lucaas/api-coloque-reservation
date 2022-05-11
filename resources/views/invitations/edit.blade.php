@@ -14,7 +14,6 @@
             <x-form-control label="Prénom" name="first_name" :bind="$invitation" />
             <x-form-control label="Nom" name="last_name" :bind="$invitation" />
             <x-form-control label="Email" name="email" type="email" :bind="$invitation" />
-            <x-form-control label="Scanné" name="is_scanned" type="checkbox" :bind="$invitation" />
 
             <x-button>
                 Mettre à jour

@@ -15,14 +15,19 @@ class Invitation extends Model
         'first_name',
         'last_name',
         'email',
+        'scanned_by_user_id'
     ];
 
-    protected $casts = [
-        'flashed' => 'boolean',
-    ];
+    public function scanned_by_user()
+    {
+        return $this->belongsTo(User::class, 'scanned_by_user_id', 'id');
+    }
 
+    public function scanned() {
+        return !is_null($this->scanned_by_user_id);
+    }
 
-    function full_name() {
+    public function full_name() {
         return "{$this->first_name} {$this->last_name}";
     }
 }

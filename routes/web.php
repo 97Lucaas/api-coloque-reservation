@@ -29,6 +29,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     })->name('scanner');
 
     Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
+    Route::get('/invitations/{invitation_key}/unscan', [InvitationsController::class, 'unscan'])->name('invitations.unscan');
     Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
     Route::get('/command/gitpull', function () {
@@ -36,15 +37,12 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         dd($output);
 
     })->name('command.gitpull');
-    Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
-
 
     Route::get('/command/migrate', function () {
         exec("php artisan migrate", $output);
         dd($output);
 
     })->name('command.migrate');
-    Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 });
 
 require __DIR__.'/auth.php';
