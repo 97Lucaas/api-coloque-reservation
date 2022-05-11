@@ -39,7 +39,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     })->name('command.gitpull');
 
     Route::get('/command/migrate', function () {
-        exec("php artisan migrate", $output);
+        exec("cd .. && php artisan migrate", $output);
         dd($output);
 
     })->name('command.migrate');
