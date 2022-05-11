@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
+Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class, 'qrcode'])->name('invitations.qrcode');
 
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

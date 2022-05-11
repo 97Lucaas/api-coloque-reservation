@@ -79,6 +79,29 @@ class InvitationsController extends Controller
     }
 
     /**
+     * Return the qrcode of the invitation
+     *
+     * @param  UUID  $invitation_key
+     * @return \Illuminate\Http\Response
+     */
+    public function qrcode(Request $request, $invitation_key)
+    {
+        $invitation = Invitation::firstWhere('key', $invitation_key);
+        if(!$invitation) {
+            $request->session()->flash('error', 'Invitation introuvable');
+            return redirect()->route('home');
+        }
+        $qrCode = (new QrCode($invitation->key))
+            ->setSize(250)
+            ->setMargin(20)
+            ->useForegroundColor(0,0,0);
+
+        return response($qrCode->writeString())
+            ->header('Content-Type', $qrCode->getContentType());
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Invitation  $invitation
