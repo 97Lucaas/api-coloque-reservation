@@ -37,6 +37,14 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     })->name('command.gitpull');
     Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
+
+
+    Route::get('/command/migrate', function () {
+        exec("php artisan migrate", $output);
+        dd($output);
+
+    })->name('command.migrate');
+    Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 });
 
 require __DIR__.'/auth.php';

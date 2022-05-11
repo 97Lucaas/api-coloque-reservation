@@ -19,6 +19,10 @@
                     <x-button :href="route('command.gitpull')">
                         Git Pull
                     </x-button>
+
+                    <x-button :href="route('command.migrate')">
+                        Artisan Migrate
+                    </x-button>
                     
                     <x-button :href="route('invitations.create')">
                         Générer une invitation
