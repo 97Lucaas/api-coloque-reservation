@@ -36,6 +36,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         //    'cd /coloque.mmibdx.fr',
         //    'git pull',
         //));
+        // execute command
+        exec("git pull", $output);
+        dd($output);
+
     })->name('command.gitpull');
     Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 });
