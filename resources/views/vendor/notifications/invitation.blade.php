@@ -8,7 +8,7 @@
 @endforeach
 @endisset
 
-![n° {{ $key }}]({{config('app.url')}}/storage/qrcodes/{{ $key }}.png)
+![n° {{ $key }}]({{config('app.url')}}/invitations/{{ $key }}/qrcode)
 
 @isset($outroLines)
 @foreach ($outroLines as $line)

@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
+Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class, 'qrcode'])->name('invitations.qrcode');
 
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
@@ -29,22 +30,19 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     })->name('scanner');
 
     Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
+    Route::get('/invitations/{invitation_key}/unscan', [InvitationsController::class, 'unscan'])->name('invitations.unscan');
     Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
 
     Route::get('/command/gitpull', function () {
-        exec("git pull", $output);
+        exec("cd .. && git pull", $output);
         dd($output);
 
     })->name('command.gitpull');
-    Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
-
 
     Route::get('/command/migrate', function () {
-        exec("php artisan migrate", $output);
+        exec("cd .. && php artisan migrate", $output);
         dd($output);
-
     })->name('command.migrate');
-    Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
 });
 
 require __DIR__.'/auth.php';

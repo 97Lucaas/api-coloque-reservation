@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Da\QrCode\QrCode;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 use App\Mail\InvitationCreated;
 use Illuminate\Support\Facades\Mail;
@@ -78,6 +79,29 @@ class InvitationsController extends Controller
     }
 
     /**
+     * Return the qrcode of the invitation
+     *
+     * @param  UUID  $invitation_key
+     * @return \Illuminate\Http\Response
+     */
+    public function qrcode(Request $request, $invitation_key)
+    {
+        $invitation = Invitation::firstWhere('key', $invitation_key);
+        if(!$invitation) {
+            $request->session()->flash('error', 'Invitation introuvable');
+            return redirect()->route('home');
+        }
+        $qrCode = (new QrCode($invitation->key))
+            ->setSize(250)
+            ->setMargin(20)
+            ->useForegroundColor(0,0,0);
+
+        return response($qrCode->writeString())
+            ->header('Content-Type', $qrCode->getContentType());
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Invitation  $invitation
@@ -85,14 +109,16 @@ class InvitationsController extends Controller
      */
     public function show(Invitation $invitation)
     {
-        //
+        return view('invitations.show', [
+            'invitation' => $invitation
+        ]);
     }
 
 
     /**
-     * Show the specified resource and set is_scanned to true
+     * Show the specified resource and set scanned_by_user_id to the actual user id
      *
-     * @param  \App\Models\Invitation  $invitation
+     * @param  UUID  $invitation_key
      * @return \Illuminate\Http\Response
      */
     public function scan(Request $request, $invitation_key)
@@ -103,19 +129,51 @@ class InvitationsController extends Controller
             return redirect()->route('scanner');
         }
 
-        if($invitation->is_scanned) {
+        if($invitation->scanned()) {
             // now method is defined, not an error
-            $request->session()->now('error', 'Invitation déjà scannée');
+            $request->session()->flash('error', 'Invitation déjà scannée');
         } else {
             // now method is defined, not an error
-            $request->session()->now('status', 'Scanné avec succès');
+            $request->session()->flash('status', 'Scanné avec succès');
         }
-        $invitation->is_scanned = true;
+        $invitation->scanned_by_user_id = Auth::user()->id;
         $invitation->save();
 
-        return view('invitations.show', [
-            'invitation' => $invitation
-        ]);
+        return redirect()->route('invitations.show', $invitation);
+        // return view('invitations.show', [
+        //     'invitation' => $invitation
+        // ]);
+    }
+
+    /**
+     * Show the specified resource and set scanned_by_user_id to NULL
+     *
+     * @param  UUID  $invitation_key
+     * @return \Illuminate\Http\Response
+     */
+    public function unscan(Request $request, $invitation_key)
+    {
+        $invitation = Invitation::firstWhere('key', $invitation_key);
+        if(!$invitation) {
+            $request->session()->flash('error', 'Invitation introuvable');
+            return redirect()->route('scanner');
+        }
+
+        if($invitation->scanned()) {
+            // now method is defined, not an error
+            $request->session()->flash('status', 'Dé-Scanné avec succès');
+        } else {
+            // now method is defined, not an error
+            $request->session()->flash('error', 'Invitation pas encore scannée');
+        }
+        $invitation->scanned_by_user_id = NULL;
+        $invitation->save();
+
+
+        return redirect()->route('invitations.show', $invitation);
+        // return view('invitations.show', [
+        //     'invitation' => $invitation
+        // ]);
     }
 
     /**
@@ -140,7 +198,7 @@ class InvitationsController extends Controller
      */
     public function update(UpdateInvitationRequest $request, Invitation $invitation)
     {        
-        $invitation->is_scanned = $request->input('is_scanned') ? true : false;
+        // $invitation->is_scanned = $request->input('is_scanned') ? true : false;
         $invitation->save();
 
         return redirect()->route('invitations.index');
