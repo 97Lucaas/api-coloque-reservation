@@ -52,27 +52,6 @@ class InvitationsController extends Controller
             'key' => Str::orderedUuid()
         ]);
 
-        $cle = $invitation->key;
-
-
-
-        $qrCode = (new QrCode($cle))
-            ->setSize(250)
-            ->setMargin(20)
-            ->useForegroundColor(0,0,0);
-
-        // now we can display the qrcode in many ways
-        // saving the result to a file:
-
-        //$qrCode->writeFile(__DIR__ . '/code.png'); // writer defaults to PNG when none is specified
-        Storage::disk('local')->put("public/qrcodes/$cle.png", $qrCode->writeString());
-
-        // display directly to the browser 
-        //header('Content-Type: '.$qrCode->getContentType());
-        //echo $qrCode->writeString();
-
-
-
         Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
         return redirect()->route('invitations.index');
@@ -88,8 +67,7 @@ class InvitationsController extends Controller
     {
         $invitation = Invitation::firstWhere('key', $invitation_key);
         if(!$invitation) {
-            $request->session()->flash('error', 'Invitation introuvable');
-            return redirect()->route('home');
+            return response()->file(public_path('assets/qrcode-expired.png'));
         }
         $qrCode = (new QrCode($invitation->key))
             ->setSize(250)
