@@ -9,7 +9,8 @@ const qrScanner = new QrScanner(videoElem, result => {
         console.log('decoded qr code:', result)
         window.location.href = `/invitations/${result}/scan`
     } else {
-        notify.error('QR code invalide', true);
+        console.log('Invalid QR code');
+        notify.error(`QR code invalide`, true);
     }
 });
 qrScanner.start();

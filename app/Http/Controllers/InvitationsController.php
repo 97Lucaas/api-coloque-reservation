@@ -99,8 +99,8 @@ class InvitationsController extends Controller
     {
         $invitation = Invitation::firstWhere('key', $invitation_key);
         if(!$invitation) {
-            $request->session()->now('error', 'Invitation introuvable');
-            return redirect()->route('invitations.scan');
+            $request->session()->flash('error', 'Invitation introuvable');
+            return redirect()->route('scanner');
         }
 
         if($invitation->is_scanned) {
