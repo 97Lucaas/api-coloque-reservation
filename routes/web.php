@@ -13,36 +13,63 @@ use App\Http\Controllers\InvitationsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-Route::resource('invitations', InvitationsController::class)->only(['create', 'store']);
-Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class, 'qrcode'])->name('invitations.qrcode');
 
 
-Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::get('/', fn()=>view('welcome'))
+    ->name('welcome');
 
-    Route::get('/scanner', function () {
-        return view('scanner');
-    })->name('scanner');
+Route::resource('invitations', InvitationsController::class)
+    ->only(['create', 'store']);
 
-    Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])->name('invitations.scan');
-    Route::get('/invitations/{invitation_key}/unscan', [InvitationsController::class, 'unscan'])->name('invitations.unscan');
-    Route::resource('invitations', InvitationsController::class)->except(['create', 'store']);
+Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class, 'qrcode'])
+    ->name('invitations.qrcode');
 
-    Route::get('/command/gitpull', function () {
-        exec("cd .. && git pull", $output);
-        dd($output);
 
-    })->name('command.gitpull');
 
-    Route::get('/command/migrate', function () {
-        exec("cd .. && php artisan migrate", $output);
-        dd($output);
-    })->name('command.migrate');
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', fn()=>view('dashboard'))
+        ->name('dashboard')
+        ->middleware('can:view-dashboard');
+
+
+
+    Route::middleware(['can:scan'])->group(function () {
+        Route::get('/scanner', fn()=>view('scanner'))
+            ->name('scanner');
+
+        Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])
+            ->name('invitations.scan');
+
+        Route::get('/invitations/{invitation_key}/unscan', [InvitationsController::class, 'unscan'])
+            ->name('invitations.unscan');
+    });
+
+
+
+    Route::resource('invitations', InvitationsController::class)
+        ->except(['create', 'store'])
+        ->middleware('can:handle-invitations');
+
+
+
+    Route::middleware(['can:exec-commands'])->group(function () {
+
+        Route::get('/command/gitpull', function () {
+            exec("cd .. && git pull", $output);
+            dd($output);
+        })->name('command.gitpull');
+
+        Route::get('/command/migrate', function () {
+            exec("cd .. && php artisan migrate", $output);
+            dd($output);
+        })->name('command.migrate');
+    
+    });
 });
+
+
 
 require __DIR__.'/auth.php';

@@ -26,6 +26,7 @@
             </article>
 
 
+            @can('exec-commands')
             <article class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <header class="mb-3">
                     <h3 class="text-3xl">Panel admin</h3>
@@ -40,6 +41,7 @@
                     </x-button>
                 </main>
             </article>
+            @endcan
         </div>
     </div>
 </x-app-layout>

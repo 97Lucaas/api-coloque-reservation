@@ -15,6 +15,9 @@ use App\Mail\InvitationCreated;
 use Illuminate\Support\Facades\Mail;
 class InvitationsController extends Controller
 {
+
+    
+    
     /**
      * Display a listing of the resource.
      *
