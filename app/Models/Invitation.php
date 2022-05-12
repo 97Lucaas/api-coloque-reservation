@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Event;
+
 class Invitation extends Model
 {
     use HasFactory;
@@ -15,8 +17,14 @@ class Invitation extends Model
         'first_name',
         'last_name',
         'email',
-        'scanned_by_user_id'
+        'scanned_by_user_id',
+        'event_id'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 
     public function scanned_by_user()
     {
