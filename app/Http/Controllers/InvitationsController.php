@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mail\InvitationCreated;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Access\Gate;
 class InvitationsController extends Controller
 {
 
@@ -25,6 +26,8 @@ class InvitationsController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Invitation::class);
+
         return view('invitations.index', [
             'invitations' => Invitation::all()
         ]);
@@ -37,6 +40,8 @@ class InvitationsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Invitation::class);
+
         return view('invitations.create');
     }
 
@@ -48,6 +53,8 @@ class InvitationsController extends Controller
      */
     public function store(StoreInvitationRequest $request)
     {
+        $this->authorize('create', Invitation::class);
+
         $invitation = Invitation::create([
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
@@ -90,6 +97,8 @@ class InvitationsController extends Controller
      */
     public function show(Invitation $invitation)
     {
+        $this->authorize('view', $invitation);
+
         return view('invitations.show', [
             'invitation' => $invitation
         ]);
@@ -104,6 +113,8 @@ class InvitationsController extends Controller
      */
     public function scan(Request $request, $invitation_key)
     {
+        Gate::authorize('scan');
+
         $invitation = Invitation::firstWhere('key', $invitation_key);
         if(!$invitation) {
             $request->session()->flash('error', 'Invitation introuvable');
@@ -134,6 +145,8 @@ class InvitationsController extends Controller
      */
     public function unscan(Request $request, $invitation_key)
     {
+        Gate::authorize('scan');
+
         $invitation = Invitation::firstWhere('key', $invitation_key);
         if(!$invitation) {
             $request->session()->flash('error', 'Invitation introuvable');
@@ -165,6 +178,8 @@ class InvitationsController extends Controller
      */
     public function edit(Invitation $invitation)
     {
+        $this->authorize('update', $invitation);
+
         return view('invitations.edit', [
             'invitation' => $invitation
         ]);
@@ -179,6 +194,8 @@ class InvitationsController extends Controller
      */
     public function update(UpdateInvitationRequest $request, Invitation $invitation)
     {        
+        $this->authorize('update', $invitation);
+
         // $invitation->is_scanned = $request->input('is_scanned') ? true : false;
         $invitation->save();
 
@@ -193,6 +210,8 @@ class InvitationsController extends Controller
      */
     public function destroy(Invitation $invitation)
     {
+        $this->authorize('delete', $invitation);
+
         $invitation->delete();
         return redirect()->route('invitations.index');
     }

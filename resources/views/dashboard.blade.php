@@ -32,6 +32,16 @@
                     <h3 class="text-3xl">Panel admin</h3>
                 </header>
                 <main class="flex flex-row flex-wrap gap-3">
+                    <x-button :href="route('users.index')">
+                        Utilisateurs
+                    </x-button>
+                </main>
+            </article>
+            <article class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <header class="mb-3">
+                    <h3 class="text-3xl">Gestion technique</h3>
+                </header>
+                <main class="flex flex-row flex-wrap gap-3">
                     <x-button :href="route('command.gitpull')">
                         Git Pull
                     </x-button>

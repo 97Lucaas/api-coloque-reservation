@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+use App\Http\Requests\UpdateUserRequest;
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,45 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
+
         return view('users.index', [
             'users' => User::all()
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-
-    /**
-     * Show the specified resource and set is_scanned to true
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function scan(Request $request, $user_key)
-    {
-        $user = User::where('key', $user_key)->firstOrFail();
-
-        if($user->is_scanned) {
-            // now method is defined, not an error
-            $request->session()->now('error', 'User déjà scannée');
-        } else {
-            // now method is defined, not an error
-            $request->session()->now('status', 'Scanné avec succès');
-        }
-        $user->is_scanned = true;
-        $user->save();
-
-        return view('users.show', [
-            'user' => $user
         ]);
     }
 
@@ -64,6 +31,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
+
         return view('users.edit', [
             'user' => $user
         ]);
@@ -78,7 +47,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {        
-        $user->is_scanned = $request->input('is_scanned') ? true : false;
+        $this->authorize('update', $user);
+
+        $user->name = request('name');
+        $user->email = request('email');
+        if ($request->user()->can('changeRole', $user) && request('role')) {
+            $user->role = request('role');
+        }
         $user->save();
 
         return redirect()->route('users.index');
@@ -92,6 +67,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
+
         $user->delete();
         return redirect()->route('users.index');
     }

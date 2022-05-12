@@ -9,22 +9,6 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-
-    /**
-     * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\User  $user
-     * @param  string  $ability
-     * @return void|bool
-     */
-    public function before(User $user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
-
-
     /**
      * Determine whether the user can view any models.
      *
@@ -33,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -45,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -56,7 +40,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -68,7 +52,19 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can change the role of the model
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $model
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function changeRole(User $user, User $model)
+    {
+        return $user->isAdmin() && $user->id !== $model->id;
     }
 
     /**
@@ -80,7 +76,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        return $user->isAdmin() && $user->id !== $model->id;
     }
 
     /**
@@ -107,4 +103,6 @@ class UserPolicy
         //
     }
 
+
+    
 }

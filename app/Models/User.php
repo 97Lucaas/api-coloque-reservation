@@ -43,7 +43,7 @@ class User extends Authenticatable
     ];
 
 
-    protected $roles = [
+    public $roles = [
         'admin',
         'modo',
         'guest'
@@ -55,5 +55,9 @@ class User extends Authenticatable
 
     public function isModo() {
         return $this->role == "modo";
+    }
+
+    public function isAtLeastModo() {
+        return $this->role == "modo" || $this->role == "admin";
     }
 }

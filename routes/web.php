@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvitationsController;
+use App\Http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('invitations', InvitationsController::class)
         ->except(['create', 'store'])
         ->middleware('can:handle-invitations');
+
+
+
+    Route::resource('users', UsersController::class)
+        ->except(['create', 'store', 'show']);
 
 
 
