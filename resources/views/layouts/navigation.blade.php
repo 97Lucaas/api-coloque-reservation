@@ -16,8 +16,8 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         Panel
                     </x-nav-link>
-                    <x-nav-link :href="route('invitations.index')" :active="request()->routeIs('invitations.index')">
-                        Invitations
+                    <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
+                        Évènements
                     </x-nav-link>
                     <x-nav-link :href="route('scanner')" :active="request()->routeIs('scanner')">
                         Scanner
@@ -73,8 +73,8 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Panel
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('invitations.index')" :active="request()->routeIs('invitations.index')">
-                Invitations
+            <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
+                Évènements
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('scanner')" :active="request()->routeIs('scanner')">
                 Scanner

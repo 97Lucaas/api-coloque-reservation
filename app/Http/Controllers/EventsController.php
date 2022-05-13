@@ -6,7 +6,7 @@ use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
-class EventController extends Controller
+class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Event::class);
+        // $this->authorize('create', Event::class);
 
         return view('events.create');
     }
@@ -97,6 +97,8 @@ class EventController extends Controller
 
         $event->title = $request->input('title');
         $event->description = $request->input('description');
+        $event->max_invitations = $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL;
+        $event->is_public = $request->boolean('is_public');
         $event->save();
 
         return redirect()->route('events.index');

@@ -3,6 +3,11 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Invitations
         </h2>
+        <div class="flex flex-row gap-2 pt-2">
+            <x-button :href="route('invitations.create')">
+                Créer une invitation
+            </x-button>
+        </div>
     </x-slot>
 
     <div class="py-12">

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvitationsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\EventsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +26,6 @@ Route::resource('invitations', InvitationsController::class)
 
 Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class, 'qrcode'])
     ->name('invitations.qrcode');
-
-
-
 
 
 Route::middleware(['auth'])->group(function () {
@@ -55,6 +54,9 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('can:handle-invitations');
 
 
+    Route::resource('events', EventsController::class)
+        ;
+        // ->except(['show']);
 
     Route::resource('users', UsersController::class)
         ->except(['create', 'store', 'show']);
@@ -76,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::get('/events/{event}', [EventsController::class, 'show'])->name('events.show');
 
 
 require __DIR__.'/auth.php';
