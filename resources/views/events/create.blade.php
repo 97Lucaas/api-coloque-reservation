@@ -16,6 +16,7 @@
             <x-form-control label="Évènement public" name="is_public" type="checkbox" />
             <x-form-control label="Nombre d'invités maximum" name="max_invitations_enabled" type="checkbox" />
             <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" />
+            <x-form-control label="Slug" name="slug" />
 
             <x-button>
                 Créer l'évènement

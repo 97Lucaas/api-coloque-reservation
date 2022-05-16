@@ -17,7 +17,7 @@
                     <p>{{ $event->description }}</p>
                 </main>
                 <footer class="p-6">
-                    <x-button :href="route('invitations.create')">Participer</x-button>
+                    <x-button :href="route('events.invite', $event->slug)">Participer</x-button>
                 </footer>
             </article>
         </div>

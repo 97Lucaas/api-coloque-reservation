@@ -15,7 +15,8 @@ class Event extends Model
         'title',
         'description',
         'max_invitations',
-        'is_public'
+        'is_public',
+        'slug'
     ];
 
     public function invitations()
