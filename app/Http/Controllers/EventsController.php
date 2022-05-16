@@ -51,6 +51,7 @@ class EventsController extends Controller
             'description' => $request->input('description'),
             'max_invitations' => $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL,
             'is_public' => $request->boolean('is_public'),
+            'slug' => $request->input('slug')
         ]);
 
         return redirect()->route('events.index');
@@ -62,8 +63,10 @@ class EventsController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Request $request, $event_slug)
     {
+        $event = Event::where('slug', $event_slug)->firstOrFail();
+        
         $this->authorize('view', $event);
 
         return view('events.show', [
@@ -76,9 +79,9 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function invite(Request $request, $event_id)
+    public function invite(Request $request, $event_slug)
     {
-        $event = Event::findOrFail($event_id);
+        $event = Event::where('slug', $event_slug)->firstOrFail();
 
         return view('events.invite', [
             'event' => $event
@@ -115,6 +118,7 @@ class EventsController extends Controller
         $event->description = $request->input('description');
         $event->max_invitations = $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL;
         $event->is_public = $request->boolean('is_public');
+        $event->slug = $request->input('slug');
         $event->save();
 
         return redirect()->route('events.index');

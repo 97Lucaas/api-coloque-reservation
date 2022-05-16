@@ -17,6 +17,7 @@
             <x-form-control label="Évènement public" name="is_public" type="checkbox" :bind="$event" />
             <x-form-control label="Nombre d'invités maximum" name="max_invitations_enabled" type="checkbox" :bind="$event" />
             <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" :bind="$event" />
+            <x-form-control label="Slug" name="slug" :bind="$event" />
 
             <x-button>
                 Mettre à jour

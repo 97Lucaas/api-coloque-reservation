@@ -18,8 +18,11 @@
                         <h4 class="text-3xl ">{{ $event->title }}</h4>
                     </header>
                     <main>
-                        <x-button :href="route('events.show', $event->id)">
+                        <x-button :href="route('events.show', $event->slug)">
                             Voir
+                        </x-button>
+                        <x-button :href="route('events.invite', $event->slug)">
+                            Participer
                         </x-button>
                         <x-button :href="route('events.edit', $event->id)">
                             Éditer

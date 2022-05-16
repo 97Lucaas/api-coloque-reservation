@@ -78,8 +78,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::get('/events/{event}', [EventsController::class, 'show'])->name('events.show');
-Route::get('/events/{event}/invite', [EventsController::class, 'invite'])->name('events.invite');
+Route::get('/events/{event_slug}', [EventsController::class, 'show'])->name('events.show');
+Route::get('/events/{event_slug}/invite', [EventsController::class, 'invite'])->name('events.invite');
 
 
 require __DIR__.'/auth.php';
