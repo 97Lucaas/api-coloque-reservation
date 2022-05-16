@@ -29,7 +29,7 @@ class StoreEventRequest extends FormRequest
             'description'=>['required', 'string'],
             'max_invitations_enabled'=>'required_with:max_invitations',
             'max_invitations'=>'required_with:max_invitations_enabled',
-            'slug' => ['required', 'unique:events']
+            'slug'=>['required', 'string', Rule::unique('events', 'slug')]
         ];
     }
 }

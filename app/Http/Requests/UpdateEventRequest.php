@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class UpdateEventRequest extends FormRequest
 {
     /**
@@ -28,6 +28,7 @@ class UpdateEventRequest extends FormRequest
             'description'=>['required', 'string'],
             'max_invitations_enabled'=>'required_with:max_invitations',
             'max_invitations'=>'required_with:max_invitations_enabled',
+            'slug'=>['required', 'string', Rule::unique('events', 'slug')->ignore($this->event)]
         ];
     }
 }

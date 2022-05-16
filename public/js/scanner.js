@@ -303,7 +303,8 @@ var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"](videoElem
     console.log('decoded qr code:', result);
     window.location.href = "/invitations/".concat(result, "/scan");
   } else {
-    notify.error('QR code invalide', true);
+    console.log('Invalid QR code');
+    notify.error("QR code invalide", true);
   }
 });
 qrScanner.start();

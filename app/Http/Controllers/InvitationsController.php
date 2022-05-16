@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mail\InvitationCreated;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 class InvitationsController extends Controller
 {
 
@@ -181,7 +181,8 @@ class InvitationsController extends Controller
         $this->authorize('update', $invitation);
 
         return view('invitations.edit', [
-            'invitation' => $invitation
+            'invitation' => $invitation,
+            'events' => Event::all()->pluck('id', 'title')
         ]);
     }
 
@@ -196,6 +197,11 @@ class InvitationsController extends Controller
     {        
         $this->authorize('update', $invitation);
 
+
+        $invitation->first_name = $request->input('first_name');
+        $invitation->last_name = $request->input('last_name');
+        $invitation->email = $request->input('email');
+        // $invitation->event_id = $request->input('event_id');
         // $invitation->is_scanned = $request->input('is_scanned') ? true : false;
         $invitation->save();
 

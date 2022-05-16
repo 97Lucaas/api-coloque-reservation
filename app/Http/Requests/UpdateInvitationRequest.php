@@ -28,7 +28,14 @@ class UpdateInvitationRequest extends FormRequest
         return [
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', Rule::unique('invitations', 'email')->ignore($this->invitation)],
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                Rule::unique('invitations')->where(
+                    fn ($query) => $query->where('email', $this->email)->where('event_id', $this->event_id)
+                )->ignore('id')
+            ],
             'is_scanned' => ['boolean']
         ];
     }
