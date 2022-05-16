@@ -27,8 +27,9 @@ class StoreEventRequest extends FormRequest
         return [
             'title'=>['required', 'string'],
             'description'=>['required', 'string'],
-            'max_invitations'=>['required_with:max_invitations_enabled', 'number'],
-            'slug' => ['required', 'unique']
+            'max_invitations_enabled'=>'required_with:max_invitations',
+            'max_invitations'=>'required_with:max_invitations_enabled',
+            'slug' => ['required', 'unique:events']
         ];
     }
 }
