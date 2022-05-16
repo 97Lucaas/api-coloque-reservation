@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invitation;
+use App\Models\Event;
 use App\Http\Requests\StoreInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
 use Illuminate\Http\Request;
@@ -42,7 +43,9 @@ class InvitationsController extends Controller
     {
         $this->authorize('create', Invitation::class);
 
-        return view('invitations.create');
+        return view('invitations.create', [
+            'events' => Event::all()->pluck('id', 'title')
+        ]);
     }
 
     /**
@@ -59,6 +62,7 @@ class InvitationsController extends Controller
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
+            'event_id' => request('event_id'),
             'key' => Str::orderedUuid()
         ]);
 

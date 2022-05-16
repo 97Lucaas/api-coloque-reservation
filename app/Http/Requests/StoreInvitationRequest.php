@@ -30,6 +30,7 @@ class StoreInvitationRequest extends FormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', Rule::unique('invitations', 'email')],
+            'event_id' => ['required'],
         ];
     }
 }

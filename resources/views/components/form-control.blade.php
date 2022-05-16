@@ -19,8 +19,8 @@ if(old($name)) {
     <div class="mb-4">
         <x-label :for="$name" :value="$label" class="cursor-pointer" />
         <select id="{{ $name }}" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="{{ $name }}">
-            @foreach($options as $option) 
-                <option value="{{ $option }}" @if($option == $value) selected @endif>{{ $option }}</option>
+            @foreach($options as $optionLabel=>$optionValue) 
+                <option value="{{ $optionValue }}" @if($optionValue == $value) selected @endif>{{ $optionLabel }}</option>
             @endforeach
         </select>
     </div>

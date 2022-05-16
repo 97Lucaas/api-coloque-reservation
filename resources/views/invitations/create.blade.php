@@ -14,6 +14,7 @@
             <x-form-control label="Prénom" name="first_name" />
             <x-form-control label="Nom" name="last_name" />
             <x-form-control label="Email" name="email" type="email" />
+            <x-form-control label="Évenement" name="event_id" type="select" :options="$events" />
 
             <x-button>
                 Générer mon invitation
