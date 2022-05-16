@@ -6,7 +6,7 @@
     </x-slot>
     
 
-    <x-form-card title="Invitation colloque">
+    <x-form-card title="Invitation">
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <form method="POST" action="{{ route('invitations.store') }}">
             @csrf
