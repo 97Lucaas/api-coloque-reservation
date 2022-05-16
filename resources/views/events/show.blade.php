@@ -11,7 +11,7 @@
             <article class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <header class="p-6">
                     <h3 class="text-2xl">{{ $event->title }}</h3>
-                    <x-button :href="route('events.edit', $event->id)">Éditer</x-button>
+                    @can("edit", $event) <x-button :href="route('events.edit', $event->id)">Éditer</x-button> @endcan
                 </header>
                 <main class="p-6">
                     <p>{{ $event->description }}</p>

@@ -55,8 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('events', EventsController::class)
-        ;
-        // ->except(['show']);
+        ->except(['show']);
 
     Route::resource('users', UsersController::class)
         ->except(['create', 'store', 'show']);

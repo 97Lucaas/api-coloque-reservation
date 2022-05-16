@@ -62,7 +62,7 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
-        $this->authorize('view', $event);
+        // $this->authorize('view', $event);
 
         return view('events.show', [
             'event' => $event

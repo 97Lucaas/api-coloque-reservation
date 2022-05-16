@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEventRequest extends FormRequest
 {
@@ -24,7 +25,9 @@ class StoreEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'=>['required', 'string'],
+            'description'=>['required', 'string'],
+            'max_invitations'=>['required_with:max_invitations_enabled', 'number']
         ];
     }
 }
