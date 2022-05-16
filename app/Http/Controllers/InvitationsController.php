@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mail\InvitationCreated;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 class InvitationsController extends Controller
 {
 

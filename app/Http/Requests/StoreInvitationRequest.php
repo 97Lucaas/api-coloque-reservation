@@ -20,6 +20,18 @@ class StoreInvitationRequest extends FormRequest
     }
 
     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.unique' => "L'email est déjà utilisé pour cet évènement"
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -29,7 +41,14 @@ class StoreInvitationRequest extends FormRequest
         return [
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', Rule::unique('invitations', 'email')],
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                Rule::unique('invitations')->where(
+                    fn ($query) => $query->where('email', $this->email)->where('event_id', $this->event_id)
+                )
+            ],
             'event_id' => ['required'],
         ];
     }
