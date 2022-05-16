@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Invitation;
+use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
@@ -65,6 +67,20 @@ class EventsController extends Controller
         $this->authorize('view', $event);
 
         return view('events.show', [
+            'event' => $event
+        ]);
+    }
+
+    /**
+     * Show the form for create an invitation.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function invite(Request $request, $event_id)
+    {
+        $event = Event::findOrFail($event_id);
+
+        return view('events.invite', [
             'event' => $event
         ]);
     }
