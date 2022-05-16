@@ -58,7 +58,7 @@ class InvitationPolicy
      */
     public function create(User $user, Event $event)
     {
-        //
+        return true;
     }
 
     /**

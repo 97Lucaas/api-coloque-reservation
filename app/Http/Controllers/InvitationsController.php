@@ -41,8 +41,6 @@ class InvitationsController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Invitation::class);
-
         return view('invitations.create', [
             'events' => Event::all()->pluck('id', 'title')
         ]);
@@ -56,8 +54,6 @@ class InvitationsController extends Controller
      */
     public function store(StoreInvitationRequest $request)
     {
-        $this->authorize('create', Invitation::class);
-
         $invitation = Invitation::create([
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
