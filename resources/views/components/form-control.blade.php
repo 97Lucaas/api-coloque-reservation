@@ -12,13 +12,13 @@ if(old($name)) {
 
 @if($type == "checkbox")
     <div class="flex flex-row mb-4 items-center gap-3">
-        <x-input x-ref="{{ $name }}" :id="$name" class=" block h-6 w-6" :type="$type" :name="$name" value="1" :checked="$value" />
+        <x-input x-ref="{{ $name }}" :disabled="$disabled" :id="$name" class=" block h-6 w-6" :type="$type" :name="$name" value="1" :checked="$value" />
         <x-label :for="$name" :value="$label" class="cursor-pointer" />
     </div>
 @elseif($type == "select")
     <div class="mb-4">
         <x-label :for="$name" :value="$label" class="cursor-pointer" />
-        <select x-ref="{{ $name }}" id="{{ $name }}" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="{{ $name }}">
+        <select x-ref="{{ $name }}" @if($disabled) disabled @endif id="{{ $name }}" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="{{ $name }}">
             @foreach($options as $optionLabel=>$optionValue) 
                 <option value="{{ $optionValue }}" @if($optionValue == $value) selected @endif>{{ $optionLabel }}</option>
             @endforeach
@@ -27,6 +27,6 @@ if(old($name)) {
 @else
     <div class="mb-4">
         <x-label :for="$name" :value="$label" />
-        <x-input x-ref="{{ $name }}" :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" :value="$value" />
+        <x-input x-ref="{{ $name }}" :disabled="$disabled" :id="$name" class="block mt-1 w-full" :type="$type" :name="$name" :value="$value"/>
     </div>
 @endif

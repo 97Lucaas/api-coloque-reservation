@@ -16,6 +16,7 @@
                 <article class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <header class="mb-3">
                         <h4 class="text-3xl ">{{ $invitation->full_name()}}</h4>
+                        <h5 class="text-1xl ">{{ $invitation->event->title}}</h5>
                         <h5 class="text-1xl leading-[40px]">@if($invitation->scanned())(scanné par {{ $invitation->scanned_by_user->name }})@endif</h5>
                     </header>
                     <main>

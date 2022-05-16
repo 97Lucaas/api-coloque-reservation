@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('guest');
+        Schema::table('invitations', function (Blueprint $table) {
+            $table->unsignedBigInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('events');
         });
     }
 
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+        Schema::table('invitations', function (Blueprint $table) {
+            $table->dropForeign('invitations_event_id_foreign');
+            $table->dropColumn('event_id');
         });
     }
 };

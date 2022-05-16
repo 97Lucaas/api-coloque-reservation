@@ -20,6 +20,7 @@ return new class extends Migration
             $table->mediumText('description');
             $table->unsignedInteger('max_invitations')->nullable();
             $table->boolean('is_public')->default(true);
+            $table->string('slug')->unique()->index();
         });
     }
 
