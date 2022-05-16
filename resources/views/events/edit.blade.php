@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Créer un évènement
+            Modifier un évènement
         </h2>
     </x-slot>
     
@@ -17,7 +17,7 @@
             <x-form-control label="Évènement public" name="is_public" type="checkbox" :bind="$event" />
             <x-form-control label="Nombre d'invités maximum" name="max_invitations_enabled" type="checkbox" :bind="$event" />
             <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" :bind="$event" />
-            <x-form-control label="Slug" name="slug" :bind="$event" />
+            <x-form-control label="Slug" name="slug" :bind="$event"/> <!-- readonly/disabled -->
 
             <x-button>
                 Mettre à jour

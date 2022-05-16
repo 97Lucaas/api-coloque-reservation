@@ -24,7 +24,10 @@ class UpdateEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'=>['required', 'string'],
+            'description'=>['required', 'string'],
+            'max_invitations_enabled'=>'required_with:max_invitations',
+            'max_invitations'=>'required_with:max_invitations_enabled',
         ];
     }
 }
