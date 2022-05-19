@@ -13,6 +13,8 @@
             @method('patch')
 
             <x-form-control label="Titre" name="title" :bind="$event" />
+            <x-form-control x-on:keyup="$refs.slug.value = $refs.slug.value.slugify()" label="Slug (url)" name="slug" :bind="$event" info="Modifier le slug rendra les anciens liens d'invitation invalides"/>
+
             <x-form-control label="Description" name="description" :bind="$event" />
             <x-form-control label="Évènement public" name="is_public" type="checkbox" :bind="$event" />
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">
@@ -21,7 +23,6 @@
             <div x-show="max_invitations_enabled">
                 <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" :bind="$event" />
             </div>
-            <x-form-control label="Slug" name="slug" :bind="$event"/> <!-- readonly/disabled -->
 
             <x-button>
                 Mettre à jour
