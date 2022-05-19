@@ -31,7 +31,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Event::class);
+        // $this->authorize('create', Event::class);
 
         return view('events.create');
     }
@@ -67,7 +67,7 @@ class EventsController extends Controller
     {
         $event = Event::where('slug', $event_slug)->firstOrFail();
         
-        // $this->authorize('view', $event);
+        $this->authorize('view', $event);
 
         return view('events.show', [
             'event' => $event

@@ -21,14 +21,11 @@
                         <x-button :href="route('events.show', $event->slug)">
                             Voir
                         </x-button>
-                        <x-button :href="route('events.invite', $event->slug)">
-                            Participer
-                        </x-button>
                         <x-button :href="route('events.edit', $event->id)">
                             Éditer
                         </x-button>
-                        <x-button :href="route('invitations.index', $event->id)">
-                            Voir les invitations
+                        <x-button :href="route('events.show', $event->id)">
+                            Scanner
                         </x-button>
                     </main>
                 </article>
