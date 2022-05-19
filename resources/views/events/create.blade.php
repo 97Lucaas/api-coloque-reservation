@@ -11,7 +11,8 @@
         <form method="POST" action="{{ route('events.store') }}" x-data="{max_invitations_enabled:false}">
             @csrf
 
-            <x-form-control label="Titre" name="title" />
+            <x-form-control x-on:keyup="$refs.slug.value = $refs.title.value" label="Titre" name="title" />
+            <x-form-control label="Slug" name="slug" />
             <x-form-control label="Description" name="description" />
             <x-form-control label="Évènement public" name="is_public" type="checkbox" />
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">
@@ -20,7 +21,6 @@
             <div x-show="max_invitations_enabled">
                 <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" />
             </div>
-            <x-form-control label="Slug" name="slug" />
 
             <x-button>
                 Créer l'évènement
