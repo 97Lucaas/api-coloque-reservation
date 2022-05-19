@@ -27,6 +27,9 @@
                         <x-button :href="route('events.edit', $event->id)">
                             Éditer
                         </x-button>
+                        <x-button :href="route('invitations.index', $event->id)">
+                            Voir les invitations
+                        </x-button>
                     </main>
                 </article>
             @endforeach
