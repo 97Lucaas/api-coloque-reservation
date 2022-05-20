@@ -28,12 +28,10 @@ Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class
     ->name('invitations.qrcode');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
 
     Route::get('/dashboard', fn()=>view('dashboard'))
-        ->name('dashboard')
-        ->middleware('can:view-dashboard');
-
+        ->name('dashboard');
 
 
     Route::middleware(['can:scan'])->group(function () {

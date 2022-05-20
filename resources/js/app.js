@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./notify');
+require('./utils');
 
 import Alpine from 'alpinejs';
 

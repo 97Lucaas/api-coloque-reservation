@@ -5080,6 +5080,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./notify */ "./resources/js/notify.js");
 
+__webpack_require__(/*! ./utils */ "./resources/js/utils.js");
+
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
@@ -5160,6 +5162,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     _loop();
   }
 })();
+
+/***/ }),
+
+/***/ "./resources/js/utils.js":
+/*!*******************************!*\
+  !*** ./resources/js/utils.js ***!
+  \*******************************/
+/***/ (() => {
+
+String.prototype.slugify = function () {
+  var separator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "-";
+  return this.toString().normalize('NFD') // split an accented letter in the base letter and the acent
+  .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
+  .toLowerCase().trim().replace(/[^a-z0-9 ]/g, '') // remove all chars not letters, numbers and spaces (to be replaced)
+  .replace(/\s+/g, separator);
+};
 
 /***/ }),
 
