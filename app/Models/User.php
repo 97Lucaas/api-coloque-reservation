@@ -60,4 +60,12 @@ class User extends Authenticatable
     public function isAtLeastModo() {
         return $this->role == "modo" || $this->role == "admin";
     }
+
+    public function rolesSelectable() {
+        $roles = [];
+        foreach($this->roles as $role) {
+            $roles[ucfirst($role)] = $role;
+        }
+        return $roles;
+    }
 }

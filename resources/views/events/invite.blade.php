@@ -14,7 +14,6 @@
         <form class="" method="POST" action="{{ route('invitations.store') }}">
             @csrf
             <input type="hidden" name="event_id" value="{{ $event->id}}"/>
-
             
             <x-form-control label="Prénom" name="first_name" />
             <x-form-control label="Nom" name="last_name" />

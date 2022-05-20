@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Validation\Rule;
-
+use App\Rules\EventNotFilled;
 
 class StoreInvitationRequest extends FormRequest
 {
@@ -27,7 +27,8 @@ class StoreInvitationRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.unique' => "L'email est déjà utilisé pour cet évènement"
+            'email.unique' => "L'email est déjà utilisé pour cet évènement",
+            'event_id.exists' => "Cet évènement n'existe pas"
         ];
     }
 
@@ -49,7 +50,12 @@ class StoreInvitationRequest extends FormRequest
                     fn ($query) => $query->where('email', $this->email)->where('event_id', $this->event_id)
                 )
             ],
-            'event_id' => ['required'],
+            'event_id' => [
+                'bail',
+                'required', 
+                'exists:App\Models\Event,id',
+                new EventNotFilled
+            ],
         ];
     }
 }

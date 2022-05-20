@@ -54,6 +54,7 @@ class InvitationsController extends Controller
      */
     public function store(StoreInvitationRequest $request)
     {
+        
         $invitation = Invitation::create([
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),

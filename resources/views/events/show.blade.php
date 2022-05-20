@@ -17,14 +17,26 @@
                     <p>{{ $event->description }}</p>
                 </main>
                 <footer class="p-6">
-                    <x-button :href="route('events.invite', $event->slug)">Participer</x-button>
+                    <x-button :href="route('events.invite', $event->slug)">
+                        Participer
+                    </x-button>
+                    <x-button :href="route('events.edit', $event->id)">
+                            Éditer
+                        </x-button>
+                        <x-button :href="route('events.show', $event->id)">
+                            Scanner
+                        </x-button>
                 </footer>
             </article>
 
             @can('exec-commands')
             <article class="bg-white/0 overflow-hidden">
                 <header class="">
-                    <h3 class="text-2xl">Invitations</h3>
+                    <h3 class="text-2xl">
+                        Invitations 
+                        @if($event->isLimited()) ({{ $event->invitationsCount() }} / {{ $event->max_invitations}}) @endif
+                        {{$event->isFilled() ? 'Rempli' : 'Pas rempli'}}
+                    </h3>
                 </header>
                 <main class="">
                     @foreach($event->invitations as $invitation)

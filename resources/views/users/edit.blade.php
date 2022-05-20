@@ -14,7 +14,7 @@
             <x-form-control label="Nom" name="name" :bind="$user" />
             <x-form-control label="Email" name="email" type="email" :bind="$user" />
             @can('changeRole', $user)
-                <x-form-control label="Rôle" name="role" type="select" :options="$user->roles" :bind="$user" />
+                <x-form-control label="Rôle" name="role" type="select" :options="$user->rolesSelectable()" :bind="$user" />
             @endcan
 
             <x-button>

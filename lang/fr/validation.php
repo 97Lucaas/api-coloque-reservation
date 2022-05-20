@@ -129,8 +129,8 @@ return [
     'url'                  => 'Le format de l\'URL de :attribute n\'est pas valide.',
     'uuid'                 => 'Le champ :attribute doit être un UUID valide',
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'event_id' => [
+            'filled' => 'L\'évènement est déjà plein !',
         ],
     ],
 ];
