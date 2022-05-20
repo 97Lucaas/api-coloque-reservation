@@ -1,7 +1,5 @@
-<p align="center">
-    ![example workflow](https://github.com/97Lucaas/api-coloque-reservation/actions/workflows/laravel.yml/badge.svg)
-</p>
-
+## Tests state
+![example workflow](https://github.com/97Lucaas/api-coloque-reservation/actions/workflows/laravel.yml/badge.svg)
 
 ## Installation
 
