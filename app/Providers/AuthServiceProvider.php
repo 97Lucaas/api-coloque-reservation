@@ -31,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAtLeastModo();
         });
 
+        // accéder au scanner
         Gate::define('scan', function (User $user) {
             return $user->isAtLeastModo();
         });
