@@ -32,7 +32,8 @@ class DeleteTest extends TestCase
         $event = Event::factory()->create();
         $user = User::factory()->modo()->create();
         $response = $this->actingAs($user)->delete("/events/{$event->id}");
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+        $response->assertRedirect('/events');
     }
 
     public function test_admin_can_delete_event()
@@ -40,6 +41,7 @@ class DeleteTest extends TestCase
         $event = Event::factory()->create();
         $user = User::factory()->admin()->create();
         $response = $this->actingAs($user)->delete("/events/{$event->id}");
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+        $response->assertRedirect('/events');
     }
 }

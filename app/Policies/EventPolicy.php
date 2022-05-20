@@ -77,7 +77,7 @@ class EventPolicy
      */
     public function restore(User $user, Event $event)
     {
-        //
+        return $user->isAtLeastModo();
     }
 
     /**
@@ -89,6 +89,6 @@ class EventPolicy
      */
     public function forceDelete(User $user, Event $event)
     {
-        //
+        return $user->isAtLeastModo();
     }
 }
