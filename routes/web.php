@@ -75,9 +75,9 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
     });
 });
 
-Route::get('/events/{event_slug}', [EventsController::class, 'show'])->name('events.show');
 // Route::get('/events/{event_slug}/invitations', [EventsController::class, 'invitations'])->name('events.invitations');
 Route::get('/events/{event_slug}/invite', [EventsController::class, 'invite'])->name('events.invite');
+Route::get('/events/{event_slug}', [EventsController::class, 'show'])->name('events.show');
 
 
 require __DIR__.'/auth.php';

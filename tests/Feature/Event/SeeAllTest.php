@@ -8,35 +8,35 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class CreateTest extends TestCase
+class SeeAllTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_guest_cannot_create_event()
+    public function test_guest_cannot_see_events()
     {
-        $response = $this->get('/events/create');
+        $response = $this->get('/events');
 
         $response->assertRedirect('/login');
     }
 
-    public function test_user_cannot_create_event()
+    public function test_user_cannot_see_events()
     {
         $user = User::factory()->create();   
-        $response = $this->actingAs($user)->get('/events/create');
+        $response = $this->actingAs($user)->get('/events');
         $response->assertStatus(403);
     }
 
-    public function test_modo_can_create_event()
+    public function test_modo_can_see_events()
     {
         $user = User::factory()->modo()->create();
-        $response = $this->actingAs($user)->get('/events/create');
+        $response = $this->actingAs($user)->get('/events');
         $response->assertStatus(200);
     }
 
-    public function test_admin_can_create_event()
+    public function test_admin_can_see_events()
     {
         $user = User::factory()->admin()->create();
-        $response = $this->actingAs($user)->get('/events/create');
+        $response = $this->actingAs($user)->get('/events');
         $response->assertStatus(200);
     }
 }
