@@ -63,6 +63,10 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                Connexion
+            </x-nav-link>
             @endauth
 
             <!-- Hamburger -->
@@ -120,6 +124,10 @@
                 </form>
             </div>
         </div>
+        @else 
+        <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+            Connexion
+        </x-responsive-nav-link>
         @endauth
     </div>
 </nav>

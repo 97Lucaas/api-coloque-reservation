@@ -12,13 +12,13 @@ class SeeAllTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_guest_cannot_see_events()
+    public function test_guest_can_see_events()
     {
         $response = $this->get('/events');
         $response->assertStatus(200);
     }
 
-    public function test_user_cannot_see_events()
+    public function test_user_can_see_events()
     {
         $user = User::factory()->create();   
         $response = $this->actingAs($user)->get('/events');

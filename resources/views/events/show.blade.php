@@ -10,6 +10,7 @@
         <article class="col-span-12 md:col-span-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <header class="p-6">
                 <h3 class="text-2xl">{{ $event->title }}</h3>
+                <x-button href="#participate" class="md:hidden">Participer</x-button>
                 
                 @can('update', $event)
                     <x-button :href="route('events.edit', $event->id)">Éditer</x-button>
@@ -24,7 +25,7 @@
             </main>
         </article>
 
-        <article class="col-span-12 md:col-span-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <article id="participate" class="col-span-12 md:col-span-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <header class="p-6">
                 <h3 class="text-2xl">Participer</h3>
                 @if($event->is_public)
@@ -86,19 +87,25 @@
                 <table class="table-auto w-full text-left">
                     <thead>
                         <tr>
-                            <th class="pr-8">Nom</th>
-                            <th class="pr-8">Prénom</th>
-                            <th class="pr-8">Email</th>
-                            <th class="pr-8">Scanné</th>
+                            <th class="pr-8 whitespace-nowrap">Nom</th>
+                            <th class="pr-8 whitespace-nowrap">Prénom</th>
+                            <th class="pr-8 whitespace-nowrap">Email</th>
+                            <th class="pr-8 whitespace-nowrap">Scanné</th>
+                            <th class="pr-8 whitespace-nowrap">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($event->invitations as $invitation)
                             <tr>
-                                <td class="pr-8">{{ $invitation->last_name }}</td>
-                                <td class="pr-8">{{ $invitation->first_name }}</td>
-                                <td class="pr-8">{{ $invitation->email }}</td>
-                                <td class="pr-8">{{ $invitation->scanned() ? "Par ".$invitation->scanned_by_user->name : 'Non' }}</td>
+                                <td class="pr-8 whitespace-nowrap">{{ $invitation->last_name }}</td>
+                                <td class="pr-8 whitespace-nowrap">{{ $invitation->first_name }}</td>
+                                <td class="pr-8 whitespace-nowrap">{{ $invitation->email }}</td>
+                                <td class="pr-8 whitespace-nowrap">{{ $invitation->scannedHumanized }}</td>
+                                <td class="pr-8 whitespace-nowrap">
+                                    @can('update', $invitation)
+                                        <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
