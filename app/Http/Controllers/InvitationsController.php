@@ -54,12 +54,15 @@ class InvitationsController extends Controller
      */
     public function store(StoreInvitationRequest $request)
     {
+        $event = Event::findOrFail($request->input('event_id'));
+
+        $this->authorize('participate', $event);
         
         $invitation = Invitation::create([
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
-            'event_id' => request('event_id'),
+            'event_id' => $event->id,
             'key' => Str::orderedUuid()
         ]);
 

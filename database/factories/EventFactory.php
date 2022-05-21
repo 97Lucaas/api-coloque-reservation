@@ -43,7 +43,7 @@ class EventFactory extends Factory
         });
     }
 
-    public function filled() 
+    public function full() 
     {
         return $this->has(
             Invitation::factory()->count(3)

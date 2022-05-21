@@ -23,9 +23,14 @@ class Event extends Model
     {
         return $this->hasMany(Invitation::class);
     }
+  
 
     public function invitationsCount() {
         return Invitation::whereEventId($this->id)->count();
+    }
+
+    public function getMaxInvitationsEnabledAttribute() {
+        return $this->isLimited();
     }
 
     public function isLimited() {

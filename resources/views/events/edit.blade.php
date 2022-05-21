@@ -8,10 +8,9 @@
 
     <x-form-card>
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-        <form method="POST" action="{{ route('events.update', $event->id) }}" x-data="{max_invitations_enabled:false}">
+        <form method="POST" action="{{ route('events.update', $event->id) }}" x-data="{max_invitations_enabled: {{ var_export($event->isLimited()) }} }">
             @csrf
             @method('patch')
-
             <x-form-control label="Titre" name="title" :bind="$event" />
             <x-form-control x-on:keyup="$refs.slug.value = $refs.slug.value.slugify()" label="Slug (url)" name="slug" :bind="$event" info="Modifier le slug rendra les anciens liens d'invitation invalides"/>
 
@@ -20,9 +19,9 @@
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">
                 <x-form-control label="Limite d'invités" name="max_invitations_enabled" type="checkbox" :bind="$event"  />
             </div>
-            <div x-show="max_invitations_enabled">
+            <template x-if="max_invitations_enabled">
                 <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" :bind="$event" />
-            </div>
+            </template>
 
             <x-button>
                 Mettre à jour

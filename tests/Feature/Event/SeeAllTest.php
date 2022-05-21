@@ -15,15 +15,14 @@ class SeeAllTest extends TestCase
     public function test_guest_cannot_see_events()
     {
         $response = $this->get('/events');
-
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_user_cannot_see_events()
     {
         $user = User::factory()->create();   
         $response = $this->actingAs($user)->get('/events');
-        $response->assertStatus(403);
+        $response->assertStatus(200);
     }
 
     public function test_modo_can_see_events()

@@ -21,6 +21,9 @@ use App\Http\Controllers\EventsController;
 Route::get('/', fn()=>view('welcome'))
     ->name('welcome');
 
+Route::get('/rgpd', fn()=>view('rgpd'))
+    ->name('rgpd');
+
 Route::resource('invitations', InvitationsController::class)
     ->only(['create', 'store']);
 
@@ -53,7 +56,7 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
 
 
     Route::resource('events', EventsController::class)
-        ->except(['show']);
+        ->except(['show', 'index']);
 
     Route::resource('users', UsersController::class)
         ->except(['create', 'store', 'show']);
@@ -76,8 +79,12 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
 });
 
 // Route::get('/events/{event_slug}/invitations', [EventsController::class, 'invitations'])->name('events.invitations');
-Route::get('/events/{event_slug}/invite', [EventsController::class, 'invite'])->name('events.invite');
+
 Route::get('/events/{event_slug}', [EventsController::class, 'show'])->name('events.show');
+Route::get('/events/{event_slug}/invite', function($event_slug) {
+    return redirect()->route('events.show', $event_slug);
+});
+Route::get('/events', [EventsController::class, 'index'])->name('events.index');
 
 
 require __DIR__.'/auth.php';

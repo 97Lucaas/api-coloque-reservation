@@ -53,8 +53,7 @@ class StoreInvitationRequest extends FormRequest
             'event_id' => [
                 'bail',
                 'required', 
-                'exists:App\Models\Event,id',
-                new EventNotFull
+                'exists:App\Models\Event,id'
             ],
         ];
     }

@@ -28,9 +28,9 @@ class EventPolicy
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Event $event)
+    public function view(?User $user, Event $event)
     {
-            return $event->is_public;
+            return optional($user)->isAtLeastModo() || $event->is_public;
     }
 
     /**
@@ -47,7 +47,7 @@ class EventPolicy
     
     public function participate(?User $user, Event $event)
     {
-        return optional($user)->isAtLeadModo() || ($event->is_public && $event->isNotFull());
+        return (optional($user)->isAtLeastModo() || $event->is_public) && $event->isNotFull();
     }
 
     /**

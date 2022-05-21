@@ -34,7 +34,7 @@ class InvitationPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isModo();
+        return $user->isAtLeastModo();
     }
 
     /**
@@ -46,7 +46,7 @@ class InvitationPolicy
      */
     public function view(User $user, Invitation $invitation)
     {
-        return $user->isModo();
+        return $user->isAtLeastModo();
     }
 
     /**
@@ -70,7 +70,7 @@ class InvitationPolicy
      */
     public function update(User $user, Invitation $invitation)
     {
-        return $user->isModo();
+        return $user->isAtLeastModo();
     }
 
     /**
@@ -82,7 +82,7 @@ class InvitationPolicy
      */
     public function delete(User $user, Invitation $invitation)
     {
-        return $user->isModo();
+        return $user->isAtLeastModo();
     }
 
     /**
@@ -94,7 +94,7 @@ class InvitationPolicy
      */
     public function restore(User $user, Invitation $invitation)
     {
-        //
+        return $user->isAtLeastModo();
     }
 
     /**
@@ -106,6 +106,6 @@ class InvitationPolicy
      */
     public function forceDelete(User $user, Invitation $invitation)
     {
-        //
+        return $user->isAtLeastModo();
     }
 }
