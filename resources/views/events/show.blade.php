@@ -21,7 +21,7 @@
                 @endcan
             </header>
             <main class="p-6 pt-0">
-                <p>{{ $event->description }}</p>
+                <p class="whitespace-pre-line">{{ $event->description }}</p>
             </main>
         </article>
 
