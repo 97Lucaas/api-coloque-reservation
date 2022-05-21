@@ -33,8 +33,8 @@
                 </div>
             </div>
 
-            @auth
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -63,7 +63,16 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+            <div class="flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        Connexion
+                    </x-nav-link>
+                </div>
+            </div>
             @endauth
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -99,9 +108,9 @@
             @endcan
         </div>
 
-        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            @auth
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
@@ -119,7 +128,11 @@
                     </x-responsive-nav-link>
                 </form>
             </div>
+            @else 
+            <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                Connexion
+            </x-responsive-nav-link>
+            @endauth
         </div>
-        @endauth
     </div>
 </nav>

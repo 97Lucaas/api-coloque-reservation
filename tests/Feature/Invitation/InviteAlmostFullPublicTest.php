@@ -28,8 +28,7 @@ class InviteAlmostFullPublicTest extends TestCase
             'email' => $this->faker->safeEmail(),
         ]);
 
-        $responsePost->assertStatus(200);
-        $responsePost->assertSeeText('Nous vous avons envoyé un E-Mail !');
+        $responsePost->assertRedirect();
     }
 
     public function test_guest_can_create_invitation_on_almost_full_public_event()
@@ -45,8 +44,7 @@ class InviteAlmostFullPublicTest extends TestCase
             'email' => $this->faker->safeEmail(),
         ]);
 
-        $responsePost->assertStatus(200);
-        $responsePost->assertSeeText('Nous vous avons envoyé un E-Mail !');
+        $responsePost->assertRedirect();
     }
 
     public function test_user_can_create_invitation_on_almost_full_public_event()

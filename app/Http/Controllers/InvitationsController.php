@@ -68,19 +68,29 @@ class InvitationsController extends Controller
 
         Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
-        return view('invitations.email-sent')->with([
-            'invitation' => $invitation
-        ]);
+        $request->session()->flash('status', 'Invitation envoyée');
+
+        return redirect()->route('invitations.sent', $invitation->key);
     }
 
-    public function sendmail($invitation_key)
+    public function sendmail(Request $request, $invitation_key)
     {
-        $invitation = Invitation::firstWhere('key', $invitation_key);
+        $invitation = Invitation::where('key', $invitation_key)->firstOrFail();
         
 
         Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
-        return view('invitations.email-sent')->with([
+        $request->session()->flash('status', 'Invitation envoyée');
+
+        return redirect()->route('invitations.sent', $invitation->key);
+    }
+
+    public function sent(Request $request, $invitation_key) 
+    {
+        $invitation = Invitation::where('key', $invitation_key)->firstOrFail();
+
+
+        return view('invitations.sent')->with([
             'invitation' => $invitation
         ]);
     }

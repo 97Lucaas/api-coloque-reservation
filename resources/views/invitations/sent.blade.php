@@ -10,12 +10,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <article class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <header class="p-6">
-                    <h3 class="text-2xl">{{ $invitation->full_name()}}</h3></br>
-                    <h4 class="text-xl">{{ $invitation->email }}</h4></br>
-                    <h4 class="text-xl">Évènement : {{ $invitation->event->title }}</h4></br>
+                    <h3 class="text-3xl">Invitation envoyée !</h3>
+                    <p>Vous allez la recevoir à l'adresse {{ $invitation->email }}</p>
+                    <p class="pt-2">
+                        Vous ne l'avez pas reçu ? <a class="underline" href="{{ route('invitations.sendmail', $invitation->key) }}">Renvoyer l'invitation</a>
+                    </p>
                 </header>
                 <main class="p-6">
-                    <code>n°{{ $invitation->key }}</code>
+                    <h4 class="text-2xl">Résumé de l'invitation</h4>
+                    <p>{{ $invitation->full_name() }}</p>
+                    <p>{{ $invitation->email }}</p>
+                    <p>Évènement : {{ $invitation->event->title }}</p>
                 </main>
                 <!-- <footer class="p-6">
                     Vous ne l'avez pas reçu ? <x-button :href="route('scanner')">Renvoyez-moi un mail</x-button>

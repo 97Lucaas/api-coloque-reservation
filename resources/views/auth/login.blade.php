@@ -13,6 +13,9 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('login') }}">
+            <h1 class="text-3xl mt-2">Gestion admin</h1>
+            <h2 class="mb-4">Se connecter</h2>
+
             @csrf
 
             <!-- Email Address -->

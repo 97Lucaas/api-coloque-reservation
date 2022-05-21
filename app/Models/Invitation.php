@@ -40,6 +40,10 @@ class Invitation extends Model
         return !is_null($this->scanned_by_user_id);
     }
 
+    public function getScannedHumanizedAttribute() {
+        return $this->scanned() ? "Par ".$this->scanned_by_user->name : 'Non';
+    }
+
     public function full_name() {
         return "{$this->first_name} {$this->last_name}";
     }
