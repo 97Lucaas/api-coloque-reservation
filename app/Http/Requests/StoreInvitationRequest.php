@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Validation\Rule;
-use App\Rules\EventNotFilled;
+use App\Rules\EventNotFull;
 
 class StoreInvitationRequest extends FormRequest
 {
@@ -54,7 +54,7 @@ class StoreInvitationRequest extends FormRequest
                 'bail',
                 'required', 
                 'exists:App\Models\Event,id',
-                new EventNotFilled
+                new EventNotFull
             ],
         ];
     }

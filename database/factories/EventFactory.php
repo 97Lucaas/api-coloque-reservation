@@ -55,7 +55,7 @@ class EventFactory extends Factory
         });
     }
 
-    public function almostFilled() 
+    public function almostFull() 
     {
         return $this->has(
             Invitation::factory()->count(2)

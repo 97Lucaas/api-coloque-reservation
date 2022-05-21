@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use App\Models\Event;
 
-class EventNotFilled implements Rule
+class EventNotFull implements Rule
 {
     /**
      * Create a new rule instance.
@@ -27,7 +27,7 @@ class EventNotFilled implements Rule
     public function passes($attribute, $value)
     {
         $event = Event::find($value);
-        return $event->isNotFilled();
+        return $event->isNotFull();
     }
 
     /**

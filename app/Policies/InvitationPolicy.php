@@ -18,12 +18,12 @@ class InvitationPolicy
      * @param  string  $ability
      * @return void|bool
      */
-    public function before(User $user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
+    // public function before(User $user, $ability)
+    // {
+    //     if ($user->isAdmin()) {
+    //         return true;
+    //     }
+    // }
 
 
     /**
@@ -56,7 +56,7 @@ class InvitationPolicy
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Event $event)
+    public function create(?User $user, Event $event)
     {
         return true;
     }

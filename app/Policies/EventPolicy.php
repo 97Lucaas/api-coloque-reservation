@@ -44,6 +44,12 @@ class EventPolicy
         return $user->isAtLeastModo();
     }
 
+    
+    public function participate(?User $user, Event $event)
+    {
+        return optional($user)->isAtLeadModo() || ($event->is_public && $event->isNotFull());
+    }
+
     /**
      * Determine whether the user can update the model.
      *

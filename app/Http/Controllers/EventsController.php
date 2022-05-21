@@ -65,12 +65,11 @@ class EventsController extends Controller
      */
     public function show(Request $request, $event_slug)
     {
-        $event = Event::where('slug', $event_slug)->firstOrFail();
-        
         // $this->authorize('view', $event);
 
         return view('events.show', [
-            'event' => $event
+            'event' => Event::where('slug', $event_slug)->firstOrFail(),
+            'events' => Event::all()
         ]);
     }
 

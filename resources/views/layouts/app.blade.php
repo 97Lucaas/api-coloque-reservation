@@ -18,7 +18,9 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @auth
+                @include('layouts.navigation')
+            @endauth
 
             <!-- Page Heading -->
             @isset($header)
@@ -32,7 +34,7 @@
             <!-- Page Content -->
 
             <x-flashed-data/>
-            <main>
+            <main class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 {{ $slot }}
             </main>
         </div>

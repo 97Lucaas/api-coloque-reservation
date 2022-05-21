@@ -9,14 +9,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class InviteFilledTest extends TestCase
+class InviteFullTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;
 
-    public function create_invitation_on_filled_event_as(?User $user) 
+    public function create_invitation_on_full_event_as(?User $user) 
     {
-        $event = Event::factory()->filled()->create();
+        $event = Event::factory()->full()->create();
         $this->actingAs($user)->get("/events/{$event->slug}/invite");
         $response = $this->actingAs($user)->post("/invitations", [
             'event_id' => $event->id,
@@ -26,15 +26,15 @@ class InviteFilledTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors([
-            'event_id'=>trans('validation.custom.event_id.filled')
+            'event_id'=>trans('validation.custom.event_id.full')
         ]);  
     }
 
 
 
-    public function test_guest_cannot_create_invitation_on_filled_event()
+    public function test_guest_cannot_create_invitation_on_full_event()
     {
-        $event = Event::factory()->filled()->create();
+        $event = Event::factory()->full()->create();
         $this->get("/events/{$event->slug}/invite");
         $response = $this->post("/invitations", [
             'event_id' => $event->id,
@@ -44,26 +44,26 @@ class InviteFilledTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors([
-            'event_id'=>trans('validation.custom.event_id.filled')
+            'event_id'=>trans('validation.custom.event_id.full')
         ]); 
     }
 
-    public function test_user_cannot_create_invitation_on_filled_event()
+    public function test_user_cannot_create_invitation_on_full_event()
     {
         $user = User::factory()->create();   
-        $this->create_invitation_on_filled_event_as($user);
+        $this->create_invitation_on_full_event_as($user);
     }
 
-    public function test_modo_cannot_create_invitation_on_filled_event()
+    public function test_modo_cannot_create_invitation_on_full_event()
     {
         $user = User::factory()->modo()->create();   
-        $this->create_invitation_on_filled_event_as($user);   
+        $this->create_invitation_on_full_event_as($user);   
     }
 
-    public function test_admin_cannot_create_invitation_on_filled_event()
+    public function test_admin_cannot_create_invitation_on_full_event()
     {
         $user = User::factory()->admin()->create();   
-        $this->create_invitation_on_filled_event_as($user);   
+        $this->create_invitation_on_full_event_as($user);   
     }
 
 }

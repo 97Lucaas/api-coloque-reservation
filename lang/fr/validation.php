@@ -130,7 +130,7 @@ return [
     'uuid'                 => 'Le champ :attribute doit être un UUID valide',
     'custom'               => [
         'event_id' => [
-            'filled' => 'L\'évènement est déjà plein !',
+            'full' => 'L\'évènement est déjà plein !',
         ],
     ],
 ];
