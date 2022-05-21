@@ -37,10 +37,20 @@ class Event extends Model
         return !is_null($this->max_invitations);
     }
 
+    public function needS($number) {
+
+        if($number > 1){
+            $return = "s";
+        }else{
+            $return = "";
+        }
+
+        return $return;
+    }
+
     public function remainingInvitationsCount() {
         return $this->max_invitations-$this->invitationsCount();
     }
-    
 
     public function isFull() {
         if(!$this->isLimited()) return false;

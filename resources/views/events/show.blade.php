@@ -30,7 +30,7 @@
                 @if($event->is_public)
                     <p>
                         @if($event->isLimited())
-                            {{ $event->remainingInvitationsCount() }} place(s) restante(s)
+                            {{ $event->remainingInvitationsCount() }} place{{ $event->needS($event->remainingInvitationsCount()) }} restante{{ $event->needS($event->remainingInvitationsCount()) }}
                         @else
                             Places illimitées
                         @endif
@@ -76,7 +76,7 @@
 
                 <p>
                     @if($event->isLimited())
-                        {{ $event->remainingInvitationsCount() }} place(s) restante(s) sur {{ $event->max_invitations }} places
+                        {{ $event->remainingInvitationsCount() }} place{{ $event->needS($event->remainingInvitationsCount()) }} restante{{ $event->needS($event->remainingInvitationsCount()) }} sur {{ $event->max_invitations }} place{{ $event->needS($event->max_invitations) }}
                     @else
                         Places illimitées
                     @endif

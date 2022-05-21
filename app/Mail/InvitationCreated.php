@@ -23,6 +23,7 @@ class InvitationCreated extends Mailable
         $this->invitation = $invitation;
     }
 
+
     /**
      * Build the message.
      *
@@ -31,12 +32,15 @@ class InvitationCreated extends Mailable
     public function build()
     {
         $full_name = $this->invitation->full_name();
+
+        $event_name = $this->invitation->event_appartenance->title;
+
         return $this->markdown('vendor.notifications.invitation')
-            ->subject("Votre ticket MMI Bordeaux")
+            ->subject("Votre ticket pour $event_name")
             ->with('key',$this->invitation->key)
             ->with('introLines', [
-                "Bonjour **$full_name**, voici votre billet,",
-                "nous vous le demanderons le jour du colloque."
+                "Bonjour **$full_name**, voici votre billet pour **$event_name**,",
+                "nous vous le demanderons le jour de l'évènement."
             ])
         ;
     }
