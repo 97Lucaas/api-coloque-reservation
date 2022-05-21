@@ -30,6 +30,11 @@ Route::resource('invitations', InvitationsController::class)
 Route::get('/invitations/{invitation_key}/qrcode', [InvitationsController::class, 'qrcode'])
     ->name('invitations.qrcode');
 
+Route::get('/invitations/{invitation_key}/sent', [InvitationsController::class, 'sent'])
+    ->name('invitations.sent');
+
+Route::get('/invitations/{invitation_key}/sendmail', [InvitationsController::class, 'sendmail'])
+    ->name('invitations.sendmail');
 
 Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
 
