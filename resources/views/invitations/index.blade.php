@@ -10,11 +10,36 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
-            @foreach($invitations as $invitation)
-                <x-invitation-card :invitation="$invitation" />
-            @endforeach
-        </div>
-    </div>
+    <article class="col-span-12 bg-white overflow-auto shadow-sm sm:rounded-lg">
+        <header class="p-6">
+            Toutes les invitations
+        </header>
+
+        <main class="p-6 pt-0">
+            <table class="table-auto w-full text-left">
+                <thead>
+                    <tr>
+                        <th class="pr-8">Nom</th>
+                        <th class="pr-8">Prénom</th>
+                        <th class="pr-8">Email</th>
+                        <th class="pr-8">Évènement</th>
+                        <th class="pr-8">Scanné</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($invitations as $invitation)
+                        <tr>
+                            <td class="pr-8">{{ $invitation->last_name }}</td>
+                            <td class="pr-8">{{ $invitation->first_name }}</td>
+                            <td class="pr-8">{{ $invitation->email }}</td>
+                            <td class="pr-8">
+                                <a class="underline" href="{{ route('events.show', $invitation->event->slug) }}">{{ $invitation->event->title }}</a>
+                            </td>
+                            <td class="pr-8">{{ $invitation->scanned() ? "Par ".$invitation->scanned_by_user->name : 'Non' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </main> 
+    </article>
 </x-app-layout>

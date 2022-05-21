@@ -82,25 +82,23 @@
                     @endif
                 </p>
             </header>
-            <main class="p-6 pt-0">
-                <table class="table-fixed w-full text-left">
+            <main class="p-6 pt-0 overflow-auto">
+                <table class="table-auto w-full text-left">
                     <thead>
                         <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Email</th>
-                            <th>Évènement</th>
-                            <th>Scanné</th>
+                            <th class="pr-8">Nom</th>
+                            <th class="pr-8">Prénom</th>
+                            <th class="pr-8">Email</th>
+                            <th class="pr-8">Scanné</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($event->invitations as $invitation)
                             <tr>
-                                <td>{{ $invitation->last_name }}</td>
-                                <td>{{ $invitation->first_name }}</td>
-                                <td>{{ $invitation->email }}</td>
-                                <td>{{ $invitation->event->title }}</td>
-                                <td>{{ $invitation->scanned() ? "Par ".$invitation->scanned_by_user->name : 'Non' }}</td>
+                                <td class="pr-8">{{ $invitation->last_name }}</td>
+                                <td class="pr-8">{{ $invitation->first_name }}</td>
+                                <td class="pr-8">{{ $invitation->email }}</td>
+                                <td class="pr-8">{{ $invitation->scanned() ? "Par ".$invitation->scanned_by_user->name : 'Non' }}</td>
                             </tr>
                         @endforeach
                     </tbody>

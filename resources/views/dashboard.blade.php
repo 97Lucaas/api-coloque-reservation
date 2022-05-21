@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
         <article class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <header class="mb-3">
                 <h3 class="text-3xl">Évènements</h3>

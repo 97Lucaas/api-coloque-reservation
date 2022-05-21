@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                         
                     </a>
@@ -13,18 +13,27 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @can('view-dashboard')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         Panel
                     </x-nav-link>
+                    @endcan
+
+                    @can('viewAny', App\Models\Event::class)
                     <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
                         Évènements
                     </x-nav-link>
+                    @endcan
+
+                    @can('scan')
                     <x-nav-link :href="route('scanner')" :active="request()->routeIs('scanner')">
                         Scanner
                     </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
+            @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
@@ -54,6 +63,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -70,17 +80,26 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            @can('view-dashboard')
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Panel
             </x-responsive-nav-link>
+            @endcan
+
+            @can('viewAny', App\Models\Event::class)
             <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
                 Évènements
             </x-responsive-nav-link>
+            @endcan
+
+            @can('scan')
             <x-responsive-nav-link :href="route('scanner')" :active="request()->routeIs('scanner')">
                 Scanner
             </x-responsive-nav-link>
+            @endcan
         </div>
 
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
@@ -101,5 +120,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>

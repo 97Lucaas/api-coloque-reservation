@@ -12,14 +12,14 @@
                 <header class="p-6">
                     <h3 class="text-2xl">{{ $invitation->full_name()}}</h3></br>
                     <h4 class="text-xl">{{ $invitation->email }}</h4></br>
-                    <h4 class="text-xl">Evenement : {{ $invitation->event->title }}</h4></br>
+                    <h4 class="text-xl">Évènement : {{ $invitation->event->title }}</h4></br>
                 </header>
                 <main class="p-6">
                     <code>n°{{ $invitation->key }}</code>
                 </main>
-                <footer class="p-6">
+                <!-- <footer class="p-6">
                     Vous ne l'avez pas reçu ? <x-button :href="route('scanner')">Renvoyez-moi un mail</x-button>
-                </footer>
+                </footer> -->
             </article>
         </div>
     </div>
