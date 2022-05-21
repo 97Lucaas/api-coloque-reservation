@@ -35,6 +35,12 @@ if(old($name)) {
         </select>
         @if($info)<small class="text-gray-600">{{ $info }}</small>@endif
     </div>
+@elseif($type == "textarea")
+    <div class="mb-4">
+        <x-label :for="$name" :value="$label" class="cursor-pointer" />
+        <textarea x-ref="{{ $name }}" @if($disabled) disabled @endif id="{{ $name }}" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="{{ $name }}" {{$attributes }}>{{$value}}</textarea>
+        @if($info)<small class="text-gray-600">{{ $info }}</small>@endif
+    </div>
 @else
     <div class="mb-4">
         <x-label :for="$name" :value="$label" />
