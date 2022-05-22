@@ -8,5 +8,7 @@ return [
     'delete_permanent' => 'Supprimer (irréversible)',
     'save' => 'Enregistrer',
     'scan' => 'Scanner',
-    'unscan' => 'Dé-scanner'
+    'scan_again' => 'Scanner à nouveau',
+    'scan_again_global' => 'Scanner à nouveau (global)',
+    'unscan' => 'Dé-scanner',
 ];

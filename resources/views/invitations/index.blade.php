@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             @lang('invitation.invitations')
-        </h2>
+        </h1>
         <div class="flex flex-row gap-2 pt-2">
             <x-button :href="route('invitations.create')">
                 @lang('action.create')
@@ -39,16 +39,11 @@
                             <td class="pr-8 whitespace-nowrap">{{ $invitation->scannedHumanized }}</td>
                             <td class="pr-8 whitespace-nowrap">
                                 @can('update', $invitation)
-                                    <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
+                                    <x-button :href="route('invitations.edit', $invitation->id)">@lang('action.edit')</x-button>
                                 @endcan
                                 @can('scan', $invitation->event)
-                                    <x-button :href="route('invitations.scan', $invitation->key)">
-                                        Scanner
-                                    </x-button>
-
-                                    <x-button :href="route('invitations.unscan', $invitation->key)">
-                                        Dé-scanner
-                                    </x-button>
+                                    <x-button :href="route('invitations.scan', $invitation->key)">@lang('action.scan')</x-button>
+                                    <x-button :href="route('invitations.unscan', $invitation->key)">@lang('action.unscan')</x-button>
                                 @endcan
                             </td>
                         </tr>

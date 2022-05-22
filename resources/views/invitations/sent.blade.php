@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Nous vous avons envoyé un E-Mail !
-        </h2>
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
+            @lang('invitation.title.sent')
+        </h1>
     </x-slot>
 
 
@@ -10,17 +10,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <article class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <header class="p-6">
-                    <h3 class="text-3xl">Invitation envoyée !</h3>
-                    <p>Vous allez la recevoir à l'adresse {{ $invitation->email }}. <b>Pensez à regarder dans vos spam</b></p>
+                    <h3 class="text-3xl">@lang('invitation.sent')</h3>
+                    <p>@lang('invitation.will_receive_at', ['adress'=>$invitation->email]) <b>@lang('invitation.check_spam')</b></p>
                     <p class="pt-2">
-                        Vous ne l'avez pas reçu ? <a class="underline" href="{{ route('invitations.sendmail', $invitation->key) }}">Renvoyer l'invitation</a>
+                        @lang('invitation.did_not_received') <a class="underline" href="{{ route('invitations.sendmail', $invitation->key) }}">@lang('invitation.send_again')</a>
                     </p>
                 </header>
                 <main class="p-6">
-                    <h4 class="text-2xl">Résumé de l'invitation</h4>
+                    <h4 class="text-2xl">@lang('invitation.resume')</h4>
                     <p>{{ $invitation->full_name() }}</p>
                     <p>{{ $invitation->email }}</p>
-                    <p>Évènement : <a class="underline" href="{{ route('events.show', $invitation->event->slug) }}">{{ $invitation->event->title }}</a></p>
+                    <p><a class="underline" href="{{ route('events.show', $invitation->event->slug) }}">{{ $invitation->event->title }}</a></p>
                 </main>
             </article>
         </div>
