@@ -101,14 +101,6 @@ class EventsController extends Controller
             return redirect()->route('events.scanner', $event->id);
         }
 
-        dd([
-            $event,
-            $invitation,
-            $invitation->event->id != $event->id,
-            $invitation->event->id,
-            $event->id
-        ]);
-
         if($invitation->event->id != $event->id) {
             // flash method is defined, not an error
             $request->session()->flash('error', "L'invitation est pour un autre évènement ({$invitation->event->title})");
