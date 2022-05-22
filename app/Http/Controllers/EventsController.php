@@ -110,13 +110,12 @@ class EventsController extends Controller
         if($invitation->scanned()) {
             // flash method is defined, not an error
             $request->session()->flash('error', 'Invitation déjà scannée');
-            return redirect()->route('events.scanner', $event->id);
-        }
-         
-        // flash method is defined, not an error
-        $request->session()->flash('status', 'Scanné avec succès');
-        $invitation->scanned_by_user_id = Auth::user()->id;
-        $invitation->save();
+        } else {
+            // flash method is defined, not an error
+            $request->session()->flash('status', 'Scanné avec succès');
+            $invitation->scanned_by_user_id = Auth::user()->id;
+            $invitation->save();
+        }      
 
         return redirect()->route('invitations.show', $invitation);
     }
