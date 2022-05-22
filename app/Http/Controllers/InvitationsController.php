@@ -141,13 +141,14 @@ class InvitationsController extends Controller
      */
     public function scan(Request $request, $invitation_key)
     {
-        Gate::authorize('scan');
-
         $invitation = Invitation::firstWhere('key', $invitation_key);
+
         if(!$invitation) {
             $request->session()->flash('error', 'Invitation introuvable');
-            return redirect()->route('scanner');
+            return redirect()->route('globalscanner');
         }
+
+        $this->authorize('scan', $invitation->event);
 
         if($invitation->scanned()) {
             // now method is defined, not an error
@@ -173,13 +174,14 @@ class InvitationsController extends Controller
      */
     public function unscan(Request $request, $invitation_key)
     {
-        Gate::authorize('scan');
-
         $invitation = Invitation::firstWhere('key', $invitation_key);
         if(!$invitation) {
             $request->session()->flash('error', 'Invitation introuvable');
-            return redirect()->route('scanner');
+            return redirect()->route('globalscanner');
         }
+
+        $this->authorize('scan', $invitation->event);
+
 
         if($invitation->scanned()) {
             // now method is defined, not an error

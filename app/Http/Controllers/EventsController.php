@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Invitation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventsController extends Controller
 {
@@ -71,6 +72,49 @@ class EventsController extends Controller
             'event' => Event::where('slug', $event_slug)->firstOrFail(),
             'events' => Event::all()
         ]);
+    }
+
+    public function scanner(Request $request, $event_id)
+    {
+        $event = Event::findOrFail($event_id);
+        
+        $this->authorize('scan', $event);
+
+        return view('events.scanner', [
+            'event' => $event
+        ]);
+    }
+
+    public function scan(Request $request, $event_id, $invitation_key)
+    {
+        $event = Event::findOrFail($event_id);
+        
+        $this->authorize('scan', $event);
+
+
+        $invitation = Invitation::firstWhere('key', $invitation_key);
+        if(!$invitation) {
+            // flash method is defined, not an error
+            $request->session()->flash('error', 'Invitation introuvable');
+            return redirect()->route('events.scanner', $event->id);
+        }
+        if($invitation->event_id !== $event->id) {
+            // flash method is defined, not an error
+            $request->session()->flash('error', "L'Invitation est pour un autre évènement ({$invitation->event->title})");
+            return redirect()->route('events.scanner', $event->id);
+        }
+
+        if($invitation->scanned()) {
+            // flash method is defined, not an error
+            $request->session()->flash('error', 'Invitation déjà scannée');
+        } else {
+            // flash method is defined, not an error
+            $request->session()->flash('status', 'Scanné avec succès');
+        }
+        $invitation->scanned_by_user_id = Auth::user()->id;
+        $invitation->save();
+
+        return redirect()->route('invitations.show', $invitation);
     }
 
     /**

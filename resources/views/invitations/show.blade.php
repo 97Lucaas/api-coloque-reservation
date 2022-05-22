@@ -19,7 +19,10 @@
                     <code>n°{{ $invitation->key }}</code>
                 </main>
                 <footer class="p-6">
-                    <x-button :href="route('scanner')">Scanner à nouveau</x-button>
+                    <x-button :href="route('events.scanner', $invitation->event->id)">Scanner à nouveau</x-button>
+                    @can('globalscan')
+                        <x-button :href="route('globalscanner')">Scanner à nouveau (global)</x-button>
+                    @endcan
                 </footer>
             </article>
         </div>

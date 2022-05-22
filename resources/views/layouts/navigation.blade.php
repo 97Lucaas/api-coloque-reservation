@@ -25,9 +25,9 @@
                     </x-nav-link>
                     @endcan
 
-                    @can('scan')
-                    <x-nav-link :href="route('scanner')" :active="request()->routeIs('scanner')">
-                        Scanner
+                    @can('globalscan')
+                    <x-nav-link :href="route('globalscanner')" :active="request()->routeIs('globalscanner')">
+                        Scanner global
                     </x-nav-link>
                     @endcan
                 </div>
@@ -101,9 +101,9 @@
             </x-responsive-nav-link>
             @endcan
 
-            @can('scan')
-            <x-responsive-nav-link :href="route('scanner')" :active="request()->routeIs('scanner')">
-                Scanner
+            @can('globalscan')
+            <x-responsive-nav-link :href="route('globalscanner')" :active="request()->routeIs('globalscanner')">
+                Scanner global
             </x-responsive-nav-link>
             @endcan
         </div>

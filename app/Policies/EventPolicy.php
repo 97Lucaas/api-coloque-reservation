@@ -50,6 +50,11 @@ class EventPolicy
         return (optional($user)->isAtLeastModo() || $event->is_public) && $event->isNotFull();
     }
 
+    public function scan(User $user, Event $event)
+    {
+        return $user->isAtLeastModo();
+    }
+
     /**
      * Determine whether the user can update the model.
      *

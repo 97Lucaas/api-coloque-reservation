@@ -12,13 +12,15 @@
                 <h3 class="text-2xl">{{ $event->title }}</h3>
                 <x-button href="#participate" class="md:hidden">Participer</x-button>
                 
+                @can('scan', $event)
+                    <x-button :href="route('events.scanner', $event->id)">Scanner</x-button>
+                @endcan
+
                 @can('update', $event)
                     <x-button :href="route('events.edit', $event->id)">Éditer</x-button>
                 @endcan
 
-                @can('scan')
-                <x-button :href="route('events.show', $event->id)">Scanner</x-button>
-                @endcan
+                
             </header>
             <main class="p-6 pt-0">
                 <p class="whitespace-pre-line">{{ $event->description }}</p>
@@ -111,7 +113,7 @@
                                     @can('update', $invitation)
                                         <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
                                     @endcan
-                                    @can('scan')
+                                    @can('scan', $event)
                                         <x-button :href="route('invitations.scan', $invitation->key)">
                                             Scanner
                                         </x-button>

@@ -41,7 +41,7 @@
                                     @can('update', $invitation)
                                         <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
                                     @endcan
-                                    @can('scan')
+                                    @can('scan', $invitation->event)
                                         <x-button :href="route('invitations.scan', $invitation->key)">
                                             Scanner
                                         </x-button>
