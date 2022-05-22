@@ -15,6 +15,10 @@
             <x-form-control x-on:keyup="$refs.slug.value = $refs.slug.value.slugify()" label="Slug (url)" name="slug" :bind="$event" info="Modifier le slug rendra les anciens liens d'invitation invalides"/>
 
             <x-form-control label="Description" type="textarea" name="description" :bind="$event" />
+
+            <x-form-control label="Date limite des inscriptions" name="end_participation_date" type="date" />
+            <x-form-control label="Date de début de l'évenement" name="start_date" type="date" />
+
             <x-form-control label="Évènement public" name="is_public" type="checkbox" :bind="$event" />
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">
                 <x-form-control label="Limite d'invités" name="max_invitations_enabled" type="checkbox" :bind="$event"  />

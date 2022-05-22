@@ -26,6 +26,8 @@ class UpdateEventRequest extends FormRequest
         return [
             'title'=>['required', 'string'],
             'description'=>['required', 'string'],
+            'end_participation_date'=>'date',
+            'start_date'=>'date',
             'max_invitations_enabled'=>'required_with:max_invitations',
             'max_invitations'=>'required_with:max_invitations_enabled',
             'slug'=>['required', 'string', Rule::unique('events', 'slug')->ignore($this->event)]

@@ -21,6 +21,8 @@
                 @endcan
             </header>
             <main class="p-6 pt-0">
+                @if($event->start_date)<p class="whitespace-pre-line">Début de l'évenement : {{ $event->start_date_humanized }}</p>@endif
+
                 <p class="whitespace-pre-line">{{ $event->description }}</p>
             </main>
         </article>
@@ -37,6 +39,7 @@
                         @endif
                     </p>
                 @endif
+                @if($event->end_participation_date)<p class="whitespace-pre-line">Fin des inscriptions : {{ $event->end_participation_date_humanized }}</p>@endif
             </header>
             <main class="p-6 pt-0">
                 @can('participate', $event)

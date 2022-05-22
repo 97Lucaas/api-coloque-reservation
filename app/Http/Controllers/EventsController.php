@@ -49,6 +49,8 @@ class EventsController extends Controller
         Event::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
+            'end_participation_date' => $request->input('end_participation_date'),
+            'start_date' => $request->input('start_date'),
             'max_invitations' => $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL,
             'is_public' => $request->boolean('is_public'),
             'slug' => $request->input('slug')
@@ -115,6 +117,8 @@ class EventsController extends Controller
 
         $event->title = $request->input('title');
         $event->description = $request->input('description');
+        $event->end_participation_date = $request->input('end_participation_date');
+        $event->start_date = $request->input('start_date');
         $event->max_invitations = $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL;
         $event->is_public = $request->boolean('is_public');
         $event->slug = $request->input('slug');
