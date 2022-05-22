@@ -33,7 +33,7 @@ class InvitationCreated extends Mailable
     {
         $full_name = $this->invitation->full_name();
 
-        $event_name = $this->invitation->event_appartenance->title;
+        $event_name = $this->invitation->event->title;
 
         return $this->markdown('vendor.notifications.invitation')
             ->subject("Votre ticket pour $event_name")

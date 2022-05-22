@@ -23,17 +23,12 @@ class Invitation extends Model
     
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
     public function scanned_by_user()
     {
         return $this->belongsTo(User::class, 'scanned_by_user_id', 'id');
-    }
-
-    public function event_appartenance()
-    {
-        return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
     public function scanned() {
