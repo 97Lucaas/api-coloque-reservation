@@ -117,6 +117,7 @@ class EventsController extends Controller
 
         $event->title = $request->input('title');
         $event->description = $request->input('description');
+        $event->place = $request->input('place');
         $event->end_participation_date = $request->input('end_participation_date');
         $event->start_date = $request->input('start_date');
         $event->max_invitations = $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL;

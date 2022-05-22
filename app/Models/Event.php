@@ -16,6 +16,7 @@ class Event extends Model
     protected $fillable = [
         'title',
         'description',
+        'place',
         'end_participation_date',
         'start_date',
         'max_invitations',
@@ -38,6 +39,20 @@ class Event extends Model
     {
         return Carbon::parse($this->start_date)->translatedFormat('d F Y à H\hi');
     }
+
+
+
+    public function getEndParticipationDateComputedAttribute()
+    {
+        return Carbon::parse($this->end_participation_date)->format('Y-m-d\TH:i');
+    }
+    
+    public function getStartDateComputedAttribute()
+    {
+        return Carbon::parse($this->start_date)->format('Y-m-d\TH:i');
+    }
+
+
 
     public function invitationsCount() {
         return Invitation::whereEventId($this->id)->count();

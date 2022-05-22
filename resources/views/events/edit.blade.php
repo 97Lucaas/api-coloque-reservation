@@ -16,8 +16,10 @@
 
             <x-form-control label="Description" type="textarea" name="description" :bind="$event" />
 
-            <x-form-control label="Date limite des inscriptions" name="end_participation_date" type="date" />
-            <x-form-control label="Date de début de l'évenement" name="start_date" type="date" />
+            <x-form-control label="Lieu" name="place" :bind="$event" />
+
+            <x-form-control label="Date limite des inscriptions" name="end_participation_date" type="dateTime-local" :value="$event->end_participation_date_computed" />
+            <x-form-control label="Date de début de l'évenement" name="start_date" type="dateTime-local" :value="$event->start_date_computed" />
 
             <x-form-control label="Évènement public" name="is_public" type="checkbox" :bind="$event" />
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">

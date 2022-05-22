@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->datetime('start_date')->nullable();
-            $table->datetime('end_participation_date')->nullable();
+            $table->string('place')->nullable();
         });
     }
 
@@ -27,8 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn('start_date');
-            $table->dropColumn('end_participation_date');
+            $table->dropColumn('place');
         });
     }
 };
