@@ -19,6 +19,7 @@ class Event extends Model
         'slug'
     ];
 
+    //pas besoin de () car c'est un hasMany (donc pris en charge par laravel)
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
@@ -30,8 +31,10 @@ class Event extends Model
     }
 
     public function scanCount() {
-        return Invitation::whereNotNull('scanned_by_user_id')->count();
+        return Invitation::whereEventId($this->id)->whereNotNull('scanned_by_user_id')->count();
     }
+
+    //ici, il faut recup maxInvitationsEnabled lorsque laravel transforme ce get ..... atribute en ....
 
     public function getMaxInvitationsEnabledAttribute() {
         return $this->isLimited();

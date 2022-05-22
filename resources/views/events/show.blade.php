@@ -77,18 +77,16 @@
 
                 <p>
                     @if($event->isLimited())
-                        {{ $event->remainingInvitationsCount() }} place{{ $event->needS($event->remainingInvitationsCount()) }} restante{{ $event->needS($event->remainingInvitationsCount()) }} sur {{ $event->max_invitations }} place{{ $event->needS($event->max_invitations) }}
+                        @choice('event.place.remaining', $event->remainingInvitationsCount())
+                        @choice('event.place.on_total', $event->max_invitations)
                     @else
                         Places illimitées
                     @endif
                 </p>
 
                 <p>
-                    @if($event->isLimited())
-                        {{ $event->scanCount() }} place{{ $event->needS($event->scanCount()) }} scannée{{ $event->needS($event->scanCount()) }} sur {{ $event->max_invitations }} place{{ $event->needS($event->max_invitations) }}
-                    @else
-                        {{ $event->scanCount() }} place{{ $event->needS($event->scanCount()) }}
-                    @endif
+                    @choice('event.place.scanned.count', $event->scanCount())
+                    @choice('event.place.scanned.on_total', $event->invitationsCount())
                 </p>
             </header>
             <main class="p-6 pt-0 overflow-auto">
@@ -112,6 +110,15 @@
                                 <td class="pr-8 whitespace-nowrap">
                                     @can('update', $invitation)
                                         <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
+                                    @endcan
+                                    @can('scan')
+                                        <x-button :href="route('invitations.scan', $invitation->key)">
+                                            Scanner
+                                        </x-button>
+
+                                        <x-button :href="route('invitations.unscan', $invitation->key)">
+                                            Dé-scanner
+                                        </x-button>
                                     @endcan
                                 </td>
                             </tr>
