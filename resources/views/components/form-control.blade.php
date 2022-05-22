@@ -2,7 +2,7 @@
     'bind'=>false, 
     'value'=>'', 
     'type'=>'text', 
-    'label', 
+    'label'=>false, 
     'name', 
     'disabled' => false, 
     'options'=>[],
@@ -10,6 +10,8 @@
 ])
 
 @php
+if(!$label) $label =  __('form.field.'.$name) ;
+
 if($bind && isset($bind[$name])) {
     $value = $bind[$name];
 }
