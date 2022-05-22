@@ -20,11 +20,15 @@
                             Voir
                         </x-button>
 
-                        @can('update', $event)
-                            <x-button :href="route('events.edit', $event->id)">
-                                Éditer
-                            </x-button>
+                        @can('scan', $event)
+                            <x-button :href="route('events.scanner', $event->id)">Scanner</x-button>
                         @endcan
+
+                        @can('update', $event)
+                            <x-button :href="route('events.edit', $event->id)">Éditer</x-button>
+                        @endcan
+
+                        
                     </main>
                 </article>
             @endcan

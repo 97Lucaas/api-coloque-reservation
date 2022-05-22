@@ -295,18 +295,34 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
+
+if (!window.REDIRECT_AFTER_QR_SCANNED) {
+  window.REDIRECT_AFTER_QR_SCANNED = function (invitation_key) {
+    return "/invitations/".concat(invitation_key, "/scan");
+  };
+}
+
 var videoElem = document.getElementById('scanner-camera');
 var cameraChoice = document.getElementById('scanner-camera-choice');
-var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"](videoElem, function (result) {
+
+var onResult = function onResult(result) {
   if (/^[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}$/.test(result)) {
     qrScanner.stop();
     console.log('decoded qr code:', result);
-    window.location.href = "/invitations/".concat(result, "/scan");
+    window.location.href = REDIRECT_AFTER_QR_SCANNED(result);
   } else {
     console.log('Invalid QR code');
     notify.error("QR code invalide", true);
   }
-});
+};
+
+var params = {};
+
+if (window.lc.getItem('camera')) {
+  params['preferredCamera'] = window.lc.getItem('camera');
+}
+
+var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"](videoElem, onResult, params);
 qrScanner.start();
 qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"].listCameras(true).then(function (cameras) {
   var _iterator = _createForOfIteratorHelper(cameras),
@@ -318,6 +334,11 @@ qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"].listCameras(true).then(functi
       var camEl = document.createElement('option');
       camEl.innerText = camera.label;
       camEl.value = camera.id;
+
+      if (params['preferredCamera'] && params['preferredCamera'] == camera.id) {
+        camEl.selected = true;
+      }
+
       cameraChoice.appendChild(camEl);
     }
   } catch (err) {
@@ -328,6 +349,7 @@ qr_scanner__WEBPACK_IMPORTED_MODULE_0__["default"].listCameras(true).then(functi
 
   cameraChoice.addEventListener('change', function () {
     qrScanner.setCamera(cameraChoice.value);
+    window.lc.setItem('camera', cameraChoice.value);
   });
 });
 })();

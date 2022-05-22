@@ -42,16 +42,16 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
         ->name('dashboard');
 
 
-    Route::middleware(['can:scan'])->group(function () {
-        Route::get('/scanner', fn()=>view('scanner'))
-            ->name('scanner');
-
-        Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])
-            ->name('invitations.scan');
-
-        Route::get('/invitations/{invitation_key}/unscan', [InvitationsController::class, 'unscan'])
-            ->name('invitations.unscan');
+    Route::middleware(['can:globalscan'])->group(function () {
+        Route::get('/globalscanner', fn()=>view('globalscanner'))
+            ->name('globalscanner');
     });
+
+    Route::get('/invitations/{invitation_key}/scan', [InvitationsController::class, 'scan'])
+        ->name('invitations.scan');
+
+    Route::get('/invitations/{invitation_key}/unscan', [InvitationsController::class, 'unscan'])
+        ->name('invitations.unscan');
 
 
 
@@ -86,6 +86,8 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
 // Route::get('/events/{event_slug}/invitations', [EventsController::class, 'invitations'])->name('events.invitations');
 
 Route::get('/events/{event_slug}', [EventsController::class, 'show'])->name('events.show');
+Route::get('/events/{event_id}/scanner', [EventsController::class, 'scanner'])->name('events.scanner');
+Route::get('/events/{event_id}/{invitation_key}/scan', [EventsController::class, 'scan'])->name('events.scan');
 Route::get('/events/{event_slug}/invite', function($event_slug) {
     return redirect()->route('events.show', $event_slug);
 });

@@ -1,30 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Invitations
+            @lang('invitation.invitations')
         </h2>
         <div class="flex flex-row gap-2 pt-2">
             <x-button :href="route('invitations.create')">
-                Créer une invitation
+                @lang('action.create')
             </x-button>
         </div>
     </x-slot>
 
     <article class="col-span-12 bg-white overflow-auto shadow-sm sm:rounded-lg">
         <header class="p-6">
-            Toutes les invitations
+            @lang('invitation.title.index')
         </header>
 
         <main class="p-6 pt-0">
             <table class="table-auto w-full text-left">
                 <thead>
                     <tr>
-                        <th class="pr-8 whitespace-nowrap">Nom</th>
-                        <th class="pr-8 whitespace-nowrap">Prénom</th>
-                        <th class="pr-8 whitespace-nowrap">Email</th>
-                        <th class="pr-8 whitespace-nowrap">Évènement</th>
-                        <th class="pr-8 whitespace-nowrap">Scanné</th>
-                        <th class="pr-8 whitespace-nowrap">Actions</th>
+                        <th class="pr-8 whitespace-nowrap">@lang('table.last_name')</th>
+                        <th class="pr-8 whitespace-nowrap">@lang('table.first_name')</th>
+                        <th class="pr-8 whitespace-nowrap">@lang('table.email')</th>
+                        <th class="pr-8 whitespace-nowrap">@lang('table.event')</th>
+                        <th class="pr-8 whitespace-nowrap">@lang('table.scanned')</th>
+                        <th class="pr-8 whitespace-nowrap">@lang('table.actions')</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,19 +38,19 @@
                             </td>
                             <td class="pr-8 whitespace-nowrap">{{ $invitation->scannedHumanized }}</td>
                             <td class="pr-8 whitespace-nowrap">
-                                    @can('update', $invitation)
-                                        <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
-                                    @endcan
-                                    @can('scan')
-                                        <x-button :href="route('invitations.scan', $invitation->key)">
-                                            Scanner
-                                        </x-button>
+                                @can('update', $invitation)
+                                    <x-button :href="route('invitations.edit', $invitation->id)">Éditer</x-button>
+                                @endcan
+                                @can('scan', $invitation->event)
+                                    <x-button :href="route('invitations.scan', $invitation->key)">
+                                        Scanner
+                                    </x-button>
 
-                                        <x-button :href="route('invitations.unscan', $invitation->key)">
-                                            Dé-scanner
-                                        </x-button>
-                                    @endcan
-                                </td>
+                                    <x-button :href="route('invitations.unscan', $invitation->key)">
+                                        Dé-scanner
+                                    </x-button>
+                                @endcan
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

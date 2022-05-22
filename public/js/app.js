@@ -5179,6 +5179,16 @@ String.prototype.slugify = function () {
   .replace(/\s+/g, separator);
 };
 
+window.lc = {
+  key: 'fr.mmibdx.invitations.scanner',
+  setItem: function setItem(item, value) {
+    localStorage.setItem("".concat(this.key, ".").concat(item), value);
+  },
+  getItem: function getItem(item) {
+    return localStorage.getItem("".concat(this.key, ".").concat(item));
+  }
+};
+
 /***/ }),
 
 /***/ "./node_modules/lodash/lodash.js":

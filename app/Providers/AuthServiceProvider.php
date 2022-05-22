@@ -36,6 +36,11 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAtLeastModo();
         });
 
+        // accéder au scanner global
+        Gate::define('globalscan', function (User $user) {
+            return $user->isAdmin();
+        });
+
         Gate::define('handle-invitations', function (User $user) {
             return $user->isAtLeastModo();
         });
