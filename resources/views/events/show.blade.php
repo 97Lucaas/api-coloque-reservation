@@ -82,6 +82,14 @@
                         Places illimitées
                     @endif
                 </p>
+
+                <p>
+                    @if($event->isLimited())
+                        {{ $event->scanCount() }} place{{ $event->needS($event->scanCount()) }} scannée{{ $event->needS($event->scanCount()) }} sur {{ $event->max_invitations }} place{{ $event->needS($event->max_invitations) }}
+                    @else
+                        {{ $event->scanCount() }} place{{ $event->needS($event->scanCount()) }}
+                    @endif
+                </p>
             </header>
             <main class="p-6 pt-0 overflow-auto">
                 <table class="table-auto w-full text-left">

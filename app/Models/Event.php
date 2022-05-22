@@ -23,10 +23,14 @@ class Event extends Model
     {
         return $this->hasMany(Invitation::class);
     }
-  
+    
 
     public function invitationsCount() {
         return Invitation::whereEventId($this->id)->count();
+    }
+
+    public function scanCount() {
+        return Invitation::whereNotNull('scanned_by_user_id')->count();
     }
 
     public function getMaxInvitationsEnabledAttribute() {
