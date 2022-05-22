@@ -49,12 +49,13 @@ class EventsController extends Controller
 
         Event::create([
             'title' => $request->input('title'),
+            'slug' => $request->input('slug'),
             'description' => $request->input('description'),
             'end_participation_date' => $request->input('end_participation_date'),
             'start_date' => $request->input('start_date'),
             'max_invitations' => $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL,
             'is_public' => $request->boolean('is_public'),
-            'slug' => $request->input('slug')
+            'place' => $request->input('place')
         ]);
 
         return redirect()->route('events.index');
@@ -162,13 +163,13 @@ class EventsController extends Controller
         $this->authorize('update', $event);
 
         $event->title = $request->input('title');
+        $event->slug = $request->input('slug');
         $event->description = $request->input('description');
         $event->place = $request->input('place');
         $event->end_participation_date = $request->input('end_participation_date');
         $event->start_date = $request->input('start_date');
         $event->max_invitations = $request->has('max_invitations_enabled') ? $request->input('max_invitations') : NULL;
         $event->is_public = $request->boolean('is_public');
-        $event->slug = $request->input('slug');
         $event->save();
 
         return redirect()->route('events.index');

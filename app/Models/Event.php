@@ -73,6 +73,12 @@ class Event extends Model
     }
 
 
+    public function getPlaceLinkAttribute() 
+    {
+        return "https://www.google.com/maps/search/?api=1&query=".urlencode($this->place);
+    }
+
+
 
     public function invitationsCount() {
         return Invitation::whereEventId($this->id)->count();

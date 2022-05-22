@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-3xl">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             Voir un évènement
-        </h2>
+        </h1>
     </x-slot>
 
 
@@ -23,10 +23,10 @@
                 
             </header>
             <main class="p-6 pt-0">
-                @if($event->start_date)<p class="whitespace-pre-line">Début de l'évenement : {{ $event->start_date_humanized }}</p>@endif
-                @if($event->place)<p class="whitespace-pre-line">Lieu de l'évenement : {{ $event->place }}</p>@endif
+                @if($event->start_date)<p>Début de l'évenement : {{ $event->start_date_humanized }}</p>@endif
+                @if($event->place)<p>Lieu de l'évenement : <a class="underline" href="{{ $event->placeLink }}">{{ $event->place }}</a></p>@endif
 
-                <p class="whitespace-pre-line">{{ $event->description }}</p>
+                <p class="pt-2 whitespace-pre-line">{{ $event->description }}</p>
             </main>
         </article>
 

@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             Modifier un évènement
-        </h2>
+        </h1>
     </x-slot>
     
 
@@ -12,7 +12,7 @@
             @csrf
             @method('patch')
             <x-form-control label="Titre" name="title" :bind="$event" />
-            <x-form-control x-on:keyup="$refs.slug.value = $refs.slug.value.slugify()" label="Slug (url)" name="slug" :bind="$event" info="Modifier le slug rendra les anciens liens d'invitation invalides"/>
+            <x-form-control x-on:change="$refs.slug.value = $refs.slug.value.slugify()" label="Slug (url)" name="slug" :bind="$event" info="Modifier le slug rendra les anciens liens d'invitation invalides"/>
 
             <x-form-control label="Description" type="textarea" name="description" :bind="$event" />
 

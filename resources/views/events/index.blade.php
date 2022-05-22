@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             Évènements
-        </h2>
+        </h1>
         @can('create', App\Models\Event::class)
             <x-button :href="route('events.create')">Créer un évènement</x-button>
         @endcan
