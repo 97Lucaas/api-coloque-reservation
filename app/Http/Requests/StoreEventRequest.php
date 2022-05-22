@@ -27,9 +27,9 @@ class StoreEventRequest extends FormRequest
         return [
             'title'=>['required', 'string'],
             'description'=>['required', 'string'],
-            'place'=>'string',
-            'end_participation_date'=>'date',
-            'start_date'=>'date',
+            'place'=>'string|nullable',
+            'end_participation_date'=>'date|nullable',
+            'start_date'=>'date|nullable',
             'max_invitations_enabled'=>'required_with:max_invitations',
             'max_invitations'=>'required_with:max_invitations_enabled',
             'slug'=>['required', 'string', Rule::unique('events', 'slug')]
