@@ -11,21 +11,21 @@
         <form method="POST" action="{{ route('events.store') }}" x-data="{max_invitations_enabled:false}">
             @csrf
 
-            <x-form-control x-on:keyup="$refs.slug.value = $refs.title.value.slugify()" label="Titre" name="title" />
-            <x-form-control label="Slug (url)" name="slug" />
-            <x-form-control label="Description" name="description" type="textarea" />
+            <x-form-control x-on:keyup="$refs.slug.value = $refs.title.value.slugify()" name="title" />
+            <x-form-control name="slug" />
+            <x-form-control name="description" type="textarea" />
 
-            <x-form-control label="Lieu" name="place" />
+            <x-form-control name="place" />
 
-            <x-form-control label="Date limite des inscriptions" name="end_participation_date" type="dateTime-local" />
-            <x-form-control label="Date de début de l'évenement" name="start_date" type="dateTime-local" />
+            <x-form-control name="end_participation_date" type="dateTime-local" />
+            <x-form-control name="start_date" type="dateTime-local" />
 
-            <x-form-control label="Évènement public" name="is_public" type="checkbox" value="true"/>
+            <x-form-control name="is_public" type="checkbox" value="true"/>
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">
-                <x-form-control label="Limite d'invités" name="max_invitations_enabled" type="checkbox"  />
+                <x-form-control name="max_invitations_enabled" type="checkbox"  />
             </div>
             <div x-show="max_invitations_enabled">
-                <x-form-control label="Nombre d'invités maximum" name="max_invitations" type="number" />
+                <x-form-control name="max_invitations" type="number" />
             </div>
 
             <x-button>
