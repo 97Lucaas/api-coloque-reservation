@@ -102,17 +102,18 @@ class EventsController extends Controller
         }
         if($invitation->event_id !== $event->id) {
             // flash method is defined, not an error
-            $request->session()->flash('error', "L'Invitation est pour un autre évènement ({$invitation->event->title})");
+            $request->session()->flash('error', "L'invitation est pour un autre évènement ({$invitation->event->title})");
             return redirect()->route('events.scanner', $event->id);
         }
 
         if($invitation->scanned()) {
             // flash method is defined, not an error
             $request->session()->flash('error', 'Invitation déjà scannée');
-        } else {
-            // flash method is defined, not an error
-            $request->session()->flash('status', 'Scanné avec succès');
+            return redirect()->route('events.scanner', $event->id);
         }
+         
+        // flash method is defined, not an error
+        $request->session()->flash('status', 'Scanné avec succès');
         $invitation->scanned_by_user_id = Auth::user()->id;
         $invitation->save();
 

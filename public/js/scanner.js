@@ -306,10 +306,12 @@ var videoElem = document.getElementById('scanner-camera');
 var cameraChoice = document.getElementById('scanner-camera-choice');
 
 var onResult = function onResult(result) {
-  if (/^[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}$/.test(result)) {
+  var key = result.data;
+
+  if (/^[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}$/.test(key)) {
     qrScanner.stop();
-    console.log('decoded qr code:', result);
-    window.location.href = REDIRECT_AFTER_QR_SCANNED(result);
+    console.log('decoded qr code:', key);
+    window.location.href = REDIRECT_AFTER_QR_SCANNED(key);
   } else {
     console.log('Invalid QR code');
     notify.error("QR code invalide", true);
