@@ -101,13 +101,13 @@ class EventsController extends Controller
             return redirect()->route('events.scanner', $event->id);
         }
 
-        // dd([
-        //     $event,
-        //     $invitation,
-        //     $invitation->event_id !== $event->id,
-        //     $invitation->event_id,
-        //     $event->id
-        // ]);
+        dd([
+            $event,
+            $invitation,
+            $invitation->event_id !== $event->id,
+            $invitation->event_id,
+            $event->id
+        ]);
 
         if($invitation->event_id !== $event->id) {
             // flash method is defined, not an error
