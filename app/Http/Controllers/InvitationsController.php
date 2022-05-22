@@ -68,10 +68,12 @@ class InvitationsController extends Controller
 
         Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
-        $request->session()->flash('status', 'Invitation envoyée');
+        $request->session()->flash('status', __('invitation.sent'));
 
         return redirect()->route('invitations.sent', $invitation->key);
     }
+
+    
 
     public function sendmail(Request $request, $invitation_key)
     {
@@ -80,11 +82,13 @@ class InvitationsController extends Controller
 
         Mail::to($invitation->email)->send(new InvitationCreated($invitation));
 
-        $request->session()->flash('status', 'Invitation envoyée');
+        $request->session()->flash('status', __('invitation.sent'));
 
         return redirect()->route('invitations.sent', $invitation->key);
     }
 
+
+    
     public function sent(Request $request, $invitation_key) 
     {
         $invitation = Invitation::where('key', $invitation_key)->firstOrFail();
@@ -144,7 +148,7 @@ class InvitationsController extends Controller
         $invitation = Invitation::firstWhere('key', $invitation_key);
 
         if(!$invitation) {
-            $request->session()->flash('error', 'Invitation introuvable');
+            $request->session()->flash('error', __('invitation.not_found'));
             return redirect()->route('globalscanner');
         }
 
@@ -152,18 +156,15 @@ class InvitationsController extends Controller
 
         if($invitation->scanned()) {
             // now method is defined, not an error
-            $request->session()->flash('error', 'Invitation déjà scannée');
+            $request->session()->flash('error', __('invitation.already_scanned'));
         } else {
             // now method is defined, not an error
-            $request->session()->flash('status', 'Scanné avec succès');
+            $request->session()->flash('status', __('invitation.successfully_scanned'));
         }
         $invitation->scanned_by_user_id = Auth::user()->id;
         $invitation->save();
 
         return redirect()->route('invitations.show', $invitation);
-        // return view('invitations.show', [
-        //     'invitation' => $invitation
-        // ]);
     }
 
     /**
@@ -176,7 +177,7 @@ class InvitationsController extends Controller
     {
         $invitation = Invitation::firstWhere('key', $invitation_key);
         if(!$invitation) {
-            $request->session()->flash('error', 'Invitation introuvable');
+            $request->session()->flash('error', __('invitation.not_found'));
             return redirect()->route('globalscanner');
         }
 
@@ -185,19 +186,16 @@ class InvitationsController extends Controller
 
         if($invitation->scanned()) {
             // now method is defined, not an error
-            $request->session()->flash('status', 'Dé-Scanné avec succès');
+            $request->session()->flash('status', __('invitation.unscanned_successfully'));
         } else {
             // now method is defined, not an error
-            $request->session()->flash('error', 'Invitation pas encore scannée');
+            $request->session()->flash('error', __('invitation.not_yet_scanned'));
         }
         $invitation->scanned_by_user_id = NULL;
         $invitation->save();
 
 
         return redirect()->route('invitations.show', $invitation);
-        // return view('invitations.show', [
-        //     'invitation' => $invitation
-        // ]);
     }
 
     /**
