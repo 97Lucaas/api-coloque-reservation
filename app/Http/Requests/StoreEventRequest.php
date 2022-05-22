@@ -27,6 +27,7 @@ class StoreEventRequest extends FormRequest
         return [
             'title'=>['required', 'string'],
             'description'=>['required', 'string'],
+            'place'=>'string',
             'end_participation_date'=>'date',
             'start_date'=>'date',
             'max_invitations_enabled'=>'required_with:max_invitations',

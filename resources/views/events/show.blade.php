@@ -24,6 +24,7 @@
             </header>
             <main class="p-6 pt-0">
                 @if($event->start_date)<p class="whitespace-pre-line">Début de l'évenement : {{ $event->start_date_humanized }}</p>@endif
+                @if($event->place)<p class="whitespace-pre-line">Lieu de l'évenement : {{ $event->place }}</p>@endif
 
                 <p class="whitespace-pre-line">{{ $event->description }}</p>
             </main>

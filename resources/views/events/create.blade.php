@@ -15,8 +15,10 @@
             <x-form-control label="Slug (url)" name="slug" />
             <x-form-control label="Description" name="description" type="textarea" />
 
-            <x-form-control label="Date limite des inscriptions" name="end_participation_date" type="date" />
-            <x-form-control label="Date de début de l'évenement" name="start_date" type="date" />
+            <x-form-control label="Lieu" name="place" />
+
+            <x-form-control label="Date limite des inscriptions" name="end_participation_date" type="dateTime-local" />
+            <x-form-control label="Date de début de l'évenement" name="start_date" type="dateTime-local" />
 
             <x-form-control label="Évènement public" name="is_public" type="checkbox" value="true"/>
             <div x-on:click="max_invitations_enabled=$refs.max_invitations_enabled.checked">
