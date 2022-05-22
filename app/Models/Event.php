@@ -32,24 +32,44 @@ class Event extends Model
 
     public function getEndParticipationDateHumanizedAttribute() // Mardi 24 Mai | 24 mai 2022 | 
     {
-        return Carbon::parse($this->end_participation_date)->translatedFormat('d F Y à H\hi');
+        if($this->end_participation_date != NULL){
+            return Carbon::parse($this->end_participation_date)->translatedFormat('d F Y à H\hi');
+        }
     }
 
     public function getStartDateHumanizedAttribute() // Mardi 24 Mai | 24 mai 2022 | 
     {
-        return Carbon::parse($this->start_date)->translatedFormat('d F Y à H\hi');
+        if($this->start_date != NULL){
+            return Carbon::parse($this->start_date)->translatedFormat('d F Y à H\hi');
+        }
     }
 
+    public function getIsParticipationEndedAttribute() // Mardi 24 Mai | 24 mai 2022 | 
+    {
+        $now = Carbon::now();
+        $timestamp_end_date = Carbon::parse($this->end_participation_date);
+        return $now->greaterThan($timestamp_end_date);
+    }
 
+    public function getIsEventEndedAttribute() // Mardi 24 Mai | 24 mai 2022 | 
+    {
+        $now = Carbon::now();
+        $timestamp_end_date = Carbon::parse($this->start_date);
+        return $now->greaterThan($timestamp_end_date);
+    }
 
     public function getEndParticipationDateComputedAttribute()
     {
-        return Carbon::parse($this->end_participation_date)->format('Y-m-d\TH:i');
+        if($this->end_participation_date != NULL){
+            return Carbon::parse($this->end_participation_date)->format('Y-m-d\TH:i');
+        }
     }
     
     public function getStartDateComputedAttribute()
     {
-        return Carbon::parse($this->start_date)->format('Y-m-d\TH:i');
+        if($this->start_date != NULL){
+            return Carbon::parse($this->start_date)->format('Y-m-d\TH:i');
+        }
     }
 
 

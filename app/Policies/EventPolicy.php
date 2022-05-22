@@ -6,6 +6,8 @@ use App\Models\Event;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+use Carbon\Carbon;
+
 class EventPolicy
 {
     use HandlesAuthorization;
@@ -47,7 +49,9 @@ class EventPolicy
     
     public function participate(?User $user, Event $event)
     {
-        return (optional($user)->isAtLeastModo() || $event->is_public) && $event->isNotFull();
+        $now = Carbon::now();
+        $timestamp_end_date = Carbon::parse($event->end_participation_date);
+        return (optional($user)->isAtLeastModo() || $event->is_public) && $event->isNotFull() && $now->lessThan($timestamp_end_date);
     }
 
     public function scan(User $user, Event $event)

@@ -62,10 +62,25 @@
                         </x-button>
                     </form>
                 @else
-                    @if($event->is_public && $event->isFull())
-                        <p>Vous ne pouvez plus rejoindre cet évènement.</p>    
+                    @if($event->is_public && ($event->isFull() || $event->is_participation_ended))
+
+                    <div class="rounded-md bg-rose-100 p-4">
+                        Vous ne pouvez plus rejoindre cet évènement car :
+                        <ul class="list-disc ml-6">
+
+                        @if($event->is_participation_ended)
+                            <li>Les inscriptions sont terminées.</li> 
+                        @endif
+                        
+                        @if($event->isFull())
+                            <li>L'évenement est plein.</li> 
+                        @endif
+
+                        </ul>
+                    </div>
+  
                     @else
-                        <p>Cet évènement est sur invitations seulement</p>
+                        <p>Cet évènement est sur invitations seulement.</p>
                     @endif
                 @endcan
             </main>
