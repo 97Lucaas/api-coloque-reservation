@@ -71,14 +71,22 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
     Route::middleware(['can:exec-commands'])->group(function () {
 
         Route::get('/command/gitpull', function () {
+
             exec("cd .. && git pull", $output, $returnVar);
-            
             $message = implode("\n", $output);
+
+            exec("php artisan config:clear");
+            exec("php artisan route:clear");
+            exec("php artisan view:clear");
+
+            exec("php artisan config:cache");
+            exec("php artisan route:cache");
+            exec("php artisan view:cache");
 
             if (strpos($message, 'Already up to date') !== false) {
                 $confirm = "✅ Le dépôt est déjà à jour.";
             } else {
-                $confirm = "🚀 Pull effectué !\n$message";
+                $confirm = "🚀 Pull effectué !\n$message\n\nCaches Laravel régénérés.";
             }
 
             return nl2br($confirm);
