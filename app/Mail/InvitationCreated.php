@@ -46,11 +46,12 @@ class InvitationCreated extends Mailable
         }
 
         return $this->markdown('vendor.notifications.invitation')
-            ->subject("Votre ticket pour $event_name")
+            ->subject("Votre billet pour $event_name")
             ->with('key',$this->invitation->key)
             ->with('introLines', [
                 "Bonjour **$full_name**, voici votre billet pour **$event_name** !",
-                "Nous vous le demanderons$datesentence le jour de l'évènement."
+                "Nous vous demanderons ce QR CODE$datesentence le jour de l'évènement.",
+                "Veillez à être en mesure de nous le présenter."
             ])
         ;
     }
