@@ -30,7 +30,7 @@
         <main class="p-6 pt-0">
             <h2 class="text-xl mt-2">Vos droits</h2>
             <p>En tant qu'utilisateur vous avez un droit d'accès, de rectification, d'effacement et de limitation. <a class="underline" href="https://www.cnil.fr/fr/les-droits-pour-maitriser-vos-donnees-personnelles">Voir sur le site de la CNIL</a> </p>
-            <p>Pour exercer l'un de ces droits, faire une réclamation à <strong>proust@arthaud.dev</strong></p>
+            <p>Pour exercer l'un de ces droits, faire une réclamation à <strong>lucas.duverneuil16@gmail.com</strong></p>
         </main>
     </article>
 </x-app-layout>

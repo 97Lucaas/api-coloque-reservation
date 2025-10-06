@@ -25,6 +25,12 @@ class EventsController extends Controller
         ]);
     }
 
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -185,6 +191,7 @@ class EventsController extends Controller
     {
         $this->authorize('delete', $event);
 
+        $event->invitations()->delete();
         $event->delete();
         return redirect()->route('events.index');
     }
