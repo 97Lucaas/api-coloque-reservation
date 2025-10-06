@@ -71,9 +71,21 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
     Route::middleware(['can:exec-commands'])->group(function () {
 
         Route::get('/command/gitpull', function () {
-            exec("cd .. && git pull", $output);
-            dd($output);
-        })->name('command.gitpull');
+            exec("cd .. && git pull", $output, $returnVar);
+            
+            // Transforme le tableau en texte
+            $message = implode("\n", $output);
+
+            // Vérifie si le dépôt était déjà à jour
+            if (strpos($message, 'Already up to date') !== false) {
+                $confirm = "✅ Le dépôt est déjà à jour.";
+            } else {
+                $confirm = "🚀 Pull effectué !\n$message";
+            }
+
+            // Affiche proprement
+            return nl2br($confirm);
+        });
 
         Route::get('/command/migrate', function () {
             exec("cd .. && php artisan migrate", $output);
