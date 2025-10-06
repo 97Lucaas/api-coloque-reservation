@@ -55,6 +55,7 @@
         <article class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <header class="mb-3">
                 <h3 class="text-3xl">Gestion technique</h3>
+                <p>LAST VERSION : {{ trim(shell_exec('git rev-parse --short HEAD')) }}</p>
             </header>
             <main class="flex flex-row flex-wrap gap-3">
                 <x-button :href="route('command.gitpull')">
