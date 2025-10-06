@@ -82,7 +82,7 @@ Route::middleware(['auth', 'can:view-dashboard'])->group(function () {
             }
 
             return nl2br($confirm);
-        });
+        })->name('command.gitpull');
 
         Route::get('/command/migrate', function () {
             exec("cd .. && php artisan migrate", $output);
